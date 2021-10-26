@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Built-By: VI1XY0G
+Class-Path: /u01/Telcel/CODE/COMMUN/Java/lib/velocity-engine-core-2.3.
+ jar /u01/Telcel/CODE/COMMUN/Java/lib/commons-lang3-3.12.0.jar /u01/Te
+ lcel/CODE/COMMUN/Java/lib/logback-classic-1.2.3.jar /u01/Telcel/CODE/
+ COMMUN/Java/lib/logback-core-1.2.3.jar /u01/Telcel/CODE/COMMUN/Java/l
+ ib/slf4j-api-1.7.25.jar /u01/Telcel/CODE/COMMUN/Java/lib/sqlite-jdbc-
+ 3.36.0.1.jar
+Build-Jdk: 1.8.0_172
+Created-By: Maven Integration for Eclipse
+Main-Class: mx.com.telcel.di.sds.gds.facturacion.BesRep572.App
+

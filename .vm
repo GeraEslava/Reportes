@@ -1,0 +1,90 @@
+REPORTE:   RCMRC231                                     B I - B E S                                                 FECHA:  $fecha_generacion
+REGION:    R0$region                                  HISTORIAL  DE  FACTURACION                                          HORA:   $hora_generacion
+                                                                                                                    PAGINA: $noPag
+#set( $acctCode        = $StrUtl.ajustarCadenaDerecha($header.getAcctCode()  ,22))
+#set( $tipoPago        = $StrUtl.ajustarCadenaDerecha($header.prefPayTypCd   ,21))
+#set( $estatusCuenta   = $StrUtl.ajustarCadenaDerecha($header.estatusCuenta  ,21))
+#set( $estatusCobranza = $StrUtl.ajustarCadenaDerecha($header.estatusCobranza,13))
+
+CUENTA: $acctCode TIPO PAGO: $tipoPago ESTATUS CUENTA: $estatusCuenta ESTATUS COBRANZA: $estatusCobranza
+NOMBRE: $header.rptCustName
+ATENCION: $header.rptAttention     
+
+TELEFONO DE       FECHA DE         FECHA  DE        FECHA DE         ESTATUS DE     
+SUSCRIPCION       ACTIVACION       ADENDUM          PRE-DESAC        SUSCRIPCION    
+-----------       ----------       ----------       ----------       ---------------
+#foreach($sub in $subs)
+#set( $serviceNumber = $StrUtl.ajustarCadenaDerecha($sub.serviceNumber,11))
+#set( $activeDate    = $StrUtl.ajustarCadenaDerecha($sub.activeDate   ,10))
+#set( $fechaAdendum  = $StrUtl.ajustarCadenaDerecha($sub.fechaAdendum ,10))
+#set( $deactiveDate  = $StrUtl.ajustarCadenaDerecha($sub.deactiveDate ,10))
+#set( $status        = $StrUtl.ajustarCadenaDerecha($sub.status       ,15))
+$serviceNumber       $activeDate       $fechaAdendum       $deactiveDate       $status
+#end
+
+DIRECC CORRESPONDENCIA: $callePos DIRECC FISCAL: $calleFis
+                        $alcaldiaColCpPos                $alcaldiaColCpFis
+                        $ciudadEstadoPos                $ciudadEstadoFis
+#set( $tel_alt  = $StrUtl.ajustarCadenaDerecha($tel_alt ,14))  
+#set( $tel_ext  = $StrUtl.ajustarCadenaDerecha($tel_ext ,31))  
+#set( $tel_cont = $StrUtl.ajustarCadenaDerecha($tel_cont,14))  
+#set( $tel_cext = $StrUtl.ajustarCadenaDerecha($tel_cext,10))
+TEL 1: $tel_cont EXT: $tel_cext TEL 2: $tel_alt EXT: $tel_ext     
+
+                    SALDO     SERVICIOS DE     SERVICIOS DE     SERVICIOS DE                                       SALDO FINAL 
+FECHA            ANTERIOR          TELECOM           TELCEL         TERCEROS            PAGOS         AJUSTES          DEL MES
+-------      ------------     ------------     ------------     ------------     ------------     -----------     ------------
+#foreach($det in $listaDet)
+#set( $endDate      = $StrUtl.printFecha($det.endDate       , 7))  
+#set( $saldoAnterior= $StrUtl.printNumber($det.saldoAnterior,12))  
+#set( $servTelecom  = $StrUtl.printNumber($det.servTelecom  ,12)) 
+#set( $servTecel    = $StrUtl.printNumber($det.servTecel    ,12))  
+#set( $servTerceros = $StrUtl.printNumber($det.servTerceros ,12))  
+#set( $pagos        = $StrUtl.printNumber($det.pagos        ,12)) 
+#set( $ajustes      = $StrUtl.printNumber($det.ajustes      ,11)) 
+#set( $saldoActual  = $StrUtl.printNumber($det.saldoActual  ,12)) 
+#set( $revisar  = $StrUtl.pointerToRight($det.revisar, $det.diferencia,$StrUtl.printFecha($det.endDate       , 5),$det.acctId))  
+$endDate      $saldoAnterior     $servTelecom     $servTecel     $servTerceros     $pagos     $ajustes     $saldoActual $revisar
+#end
+-------      ------------     ------------     ------------      -----------     ------------     -----------     ------------
+                                     ANTIGUEDAD        ANTIGUEDAD       ANTIGUEDAD       ANTIGUEDAD      ANTIGUEDAD
+     TOTAL             ACTUAL         1-30 DIAS        31-60 DIAS       61-90 DIAS      91-120 DIAS      + 120 DIAS
+--------------   --------------   --------------   --------------   --------------   --------------   --------------
+#set( $saldoCuenta      = $StrUtl.printNumber($ant.saldoCuenta     ,14))  
+#set( $rpt0Balance      = $StrUtl.printNumber($ant.rpt0Balance     ,14))  
+#set( $rpt30Balance     = $StrUtl.printNumber($ant.rpt30Balance    ,14)) 
+#set( $rpt60Balance     = $StrUtl.printNumber($ant.rpt60Balance    ,14))  
+#set( $rpt90Balance     = $StrUtl.printNumber($ant.rpt90Balance    ,14))  
+#set( $rpt120Balance    = $StrUtl.printNumber($ant.rpt120Balance   ,14)) 
+#set( $rptMas120Balance = $StrUtl.printNumber($ant.rptMas120Balance,14)) 
+$saldoCuenta   $rpt0Balance   $rpt30Balance   $rpt60Balance   $rpt90Balance   $rpt120Balance   $rptMas120Balance
+------------------------------------------------------------------------------------------------------------------------------------
+#set( $saldoCuentaST = $StrUtl.printNumberSeparadorMiles($ant.saldoCuenta,14))
+#set( $f_a_fin = $StrUtl.printNumberSeparadorMiles($f_a_fin,14) )  
+#set( $f_s_fin = $StrUtl.ajustarCadenaDerecha($f_s_fin,6) )  
+#set( $o_a_fin = $StrUtl.printNumberSeparadorMiles($o_a_fin,14) )  
+#set( $o_s_fin = $StrUtl.ajustarCadenaDerecha($o_s_fin,6) )
+#set( $f_a_apl = $StrUtl.printNumberSeparadorMiles($f_a_apl,14) )  
+#set( $f_s_apl = $StrUtl.ajustarCadenaDerecha($f_s_apl,6) )  
+#set( $o_a_apl = $StrUtl.printNumberSeparadorMiles($o_a_apl,14) )  
+#set( $o_s_apl = $StrUtl.ajustarCadenaDerecha($o_s_apl,6) )
+#set( $f_a_ser = $StrUtl.printNumberSeparadorMiles($f_a_ser,14) )  
+#set( $f_s_ser = $StrUtl.ajustarCadenaDerecha($f_s_ser,6) )  
+#set( $o_a_ser = $StrUtl.printNumberSeparadorMiles($o_a_ser,14) )  
+#set( $o_s_ser = $StrUtl.ajustarCadenaDerecha($o_s_ser,6) )
+#set( $f_a_tax = $StrUtl.printNumberSeparadorMiles($f_a_tax,14) )  
+#set( $f_s_tax = $StrUtl.ajustarCadenaDerecha($f_s_tax,6) ) 
+#set( $o_a_tax = $StrUtl.printNumberSeparadorMiles($o_a_tax,14) ) 
+#set( $o_s_tax = $StrUtl.ajustarCadenaDerecha($o_s_tax,6) ) 
+#set( $totFacturado = $StrUtl.printNumberSeparadorMiles($totFacturado,14) ) 
+DESCRIPCION                             MONTO             AJUSTES       MONTO               AJUSTES
+                                                          COMPLETADOS                       INICIAL
+------------------------------------    --------------    ----------    --------------    ----------
+SALDO ANTERIOR                          $saldoCuentaST
+FINEQ / AMIGO FACIL:                    $f_a_fin    $f_s_fin        $o_a_fin    $o_s_fin            
+EQUIPO A PLAZOS:                        $f_a_apl    $f_s_apl        $o_a_apl    $o_s_apl             
+PENALIZACION POR SERVICIO               $f_a_ser    $f_s_ser        $o_a_ser    $o_s_ser     
+IVA AJUSTES PE                          $f_a_tax    $f_s_tax        $o_a_tax    $o_s_tax    
+                                        --------------                  --------------
+TOTAL FACTURADO:                        $totFacturado
+------------------------------------------------------------------------------------------------------------------------------------
