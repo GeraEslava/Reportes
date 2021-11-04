@@ -8,5 +8,6 @@ Class-Path: /u01/Telcel/CODE/COMMUN/Java/lib/velocity-engine-core-2.3.
  3.36.0.1.jar
 Build-Jdk: 1.8.0_172
 Created-By: Maven Integration for Eclipse
-Main-Class: mx.com.telcel.di.sds.gds.facturacion.BesRep572.App
+Main-Class: mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Ap
+ p
 

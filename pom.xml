@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
   
   <groupId>mx.com.telcel.di.sds.gds.facturacion</groupId>
-  <artifactId>Reportes_0DM-1KQ-660</artifactId>
+  <artifactId>BESRep-0DM-1KQ-660</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>Reportes_0DM-1KQ-660</name>
+  <name>BESRep-0DM-1KQ-660</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -96,7 +96,7 @@
 	</dependency>
   </dependencies>
   <build>
-		<finalName>BESRep572</finalName>
+		<finalName>BESRep-0DM-1KQ-660</finalName>
 		<plugins>
 			<!-- Set a compiler level -->
 			<plugin>
@@ -120,7 +120,7 @@
 							<addClasspath>true</addClasspath>
 							<!--classpathPrefix>lib/</classpathPrefix--> <!-- Local -->
 							<classpathPrefix>/u01/Telcel/CODE/COMMUN/Java/lib/</classpathPrefix> <!-- DEV/PRD -->
-							<mainClass>mx.com.telcel.di.sds.gds.facturacion.BesRep572.App</mainClass>
+							<mainClass>mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.App</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

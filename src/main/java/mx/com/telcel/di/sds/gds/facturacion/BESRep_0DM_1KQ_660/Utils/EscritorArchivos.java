@@ -1,4 +1,4 @@
-package mx.com.telcel.di.sds.gds.facturacion.Reportes_0DM_iKQ_660.Utils;
+package mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Utils;
 
 import java.io.BufferedWriter;
 import java.io.File;

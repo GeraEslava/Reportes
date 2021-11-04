@@ -1,16 +1,16 @@
-package mx.com.telcel.di.sds.gds.facturacion.Reportes_0DM_iKQ_660.Config;
+package mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Config;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import mx.com.telcel.di.sds.gds.facturacion.Reportes_0DM_iKQ_660.App;
+import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.App;
 
 public interface Constantes {
 	
 	public static final String DB_H2 = "H2";
 	public static final String DB_SQLITE = "SQLITE";
-	public static final String DB_NAME_APP = "BIBESRep572";
+	public static final String DB_NAME_APP = "Reportes0DM1KQ660";
 	public static final String EXT_ARCH_CTL = ".ctl";
 	
 	public static final String CADENA_VACIA = "";

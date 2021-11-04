@@ -1,9 +1,9 @@
-package mx.com.telcel.di.sds.gds.facturacion.Reportes_0DM_iKQ_660.Service;
+package mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import mx.com.telcel.di.sds.gds.facturacion.Reportes_0DM_iKQ_660.Config.Constantes;
+import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Config.Constantes;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;

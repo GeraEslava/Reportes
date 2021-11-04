@@ -1,4 +1,4 @@
-package mx.com.telcel.di.sds.gds.facturacion.Reportes_0DM_iKQ_660;
+package mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,15 +12,14 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import mx.com.telcel.di.sds.gds.facturacion.Reportes_0DM_iKQ_660.Service.GeneradorReporte;
+import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Service.GeneradorReporte;
 
 public class App {
 	
-	public static final String APP_NAME = "Reportes_0DM_iKQ_660";
+	public static final String APP_NAME = "BESRep-0DM-1KQ-660";
 	public static String ID_PROC;
 	public static String FCH_ENTREGA;
 	public static String ARCH_TEMPLATE = null;
-	public static String ARCH_TEMPLATE_REP_VACIO = null;
 	public static String PATH_TEMPLATE = null;
 	public static String DIR_CFG = null;
 	public static String DIR_LOG = null;
@@ -45,7 +44,7 @@ public class App {
 			System.out.println("La variable de ambiente ${DIR_LOG} no fue proporcionada correctamente, se indicara una por defecto");
 		}
 		
-		System.setProperty("logback.configurationFile", DIR_CFG + File.separator + "BESRep572.logback.xml");
+		System.setProperty("logback.configurationFile", DIR_CFG + File.separator + "BESRep-0DM-1KQ-660.logback.xml");
 		
     	final SimpleDateFormat dt1 = new SimpleDateFormat("yyyyMMddhhmmss");
     	ID_PROC = dt1.format(new Date());
@@ -56,7 +55,6 @@ public class App {
     	NOM_ARCH_CONFIG = APP_NAME + ".application.properties";
 		loadProperties(CONFIG, DIR_CFG + File.separator + NOM_ARCH_CONFIG);
 		ARCH_TEMPLATE = revisaPropiedad("ARCH_TEMPLATE");
-		ARCH_TEMPLATE_REP_VACIO = revisaPropiedad("ARCH_TEMPLATE_REP_VACIO");
 		FORMATO_CIFRAS = revisaPropiedad("FORMATO_CIFRAS");
 		FORMATO_CIFRAS_SEP_MILES = revisaPropiedad("FORMATO_CIFRAS_SEP_MILES");
 		FORMATO_FECHA_DET = revisaPropiedad("FORMATO_FECHA_DET");

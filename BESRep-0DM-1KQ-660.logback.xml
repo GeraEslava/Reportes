@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+<timestamp key="myTimestamp" datePattern="yyyyMMdd"/>
+<property name="DEV_HOME" value="${DIR_LOG}" />
+
+<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+	<encoder>
+		<pattern>%d{HH:mm:ss.SSS}|%-5level|%thread|\(%M\) \(%file:%line\):%msg%n
+		</pattern>
+	</encoder>
+</appender>
+
+ <appender name="BESRep-0DM-1KQ-660" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${DIR_LOG}/BESRep-0DM-1KQ-660.HFEC.${myTimestamp}.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>BESRep-0DM-1KQ-660.HFEC.%d{yyyyMMdd}.log</fileNamePattern>
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} |%-5level| [%thread] [%M] \(%file:%line\):%msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+<appender name="FILE" class="ch.qos.logback.classic.sift.SiftingAppender">
+
+    <discriminator>
+        <key>logName</key>
+        <defaultValue>test</defaultValue>
+    </discriminator>
+    <sift>
+        <appender name="FILE-app" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${DIR_LOG}/app.log</file>
+            <append>false</append>
+            <encoder  class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%d [%thread] %level %mdc %logger{35} - %msg%n</pattern>
+            </encoder>
+            <rollingPolicy
+              class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+              <FileNamePattern>${DEV_HOME}/${logName}.%i.log.zip
+              </FileNamePattern>
+              <MinIndex>1</MinIndex>
+              <MaxIndex>10</MaxIndex>
+        </rollingPolicy>
+        <triggeringPolicy
+            class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+        </appender>
+    </sift>
+</appender>
+
+<root level="INFO">
+    <appender-ref ref="STDOUT" />
+	<appender-ref ref="BESRep-0DM-1KQ-660" />
+</root>
+</configuration>

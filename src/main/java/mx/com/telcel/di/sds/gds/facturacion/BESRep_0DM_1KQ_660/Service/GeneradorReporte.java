@@ -1,4 +1,4 @@
-package mx.com.telcel.di.sds.gds.facturacion.Reportes_0DM_iKQ_660.Service;
+package mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Service;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,10 +10,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import mx.com.telcel.di.sds.gds.facturacion.Reportes_0DM_iKQ_660.App;
-import mx.com.telcel.di.sds.gds.facturacion.Reportes_0DM_iKQ_660.BaseDatos.BaseDeDatosEmbebida;
-import mx.com.telcel.di.sds.gds.facturacion.Reportes_0DM_iKQ_660.Config.Constantes;
-import mx.com.telcel.di.sds.gds.facturacion.Reportes_0DM_iKQ_660.Dao.ExtractorInfoReps_0DM_1KQ_660_Dao;
+import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.App;
+import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.BaseDatos.BaseDeDatosEmbebida;
+import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Config.Constantes;
+import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Dao.ExtractorInfoReps_0DM_1KQ_660_Dao;
 
 public class GeneradorReporte implements Constantes {
 	private static final Logger LOG = LoggerFactory.getLogger("funcionalLogger");
