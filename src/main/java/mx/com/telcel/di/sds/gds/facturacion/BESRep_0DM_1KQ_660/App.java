@@ -16,7 +16,7 @@ import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Service.Generador
 
 public class App {
 	
-	public static final String APP_NAME = "BESRep-0DM-1KQ-660";
+	public static final String APP_NAME = "BESRep_0DM_1KQ_660";
 	public static String ID_PROC;
 	public static String FCH_ENTREGA;
 	public static String ARCH_TEMPLATE = null;
@@ -44,7 +44,7 @@ public class App {
 			System.out.println("La variable de ambiente ${DIR_LOG} no fue proporcionada correctamente, se indicara una por defecto");
 		}
 		
-		System.setProperty("logback.configurationFile", DIR_CFG + File.separator + "BESRep-0DM-1KQ-660.logback.xml");
+		System.setProperty("logback.configurationFile", DIR_CFG + File.separator + "BESRep_0DM_1KQ_660.logback.xml");
 		
     	final SimpleDateFormat dt1 = new SimpleDateFormat("yyyyMMddhhmmss");
     	ID_PROC = dt1.format(new Date());
@@ -79,7 +79,7 @@ public class App {
 			ID_EXEC_EXTERNA = args[0];
 			LOG.info("Procesando el conjunto de archivos con ID de ejecucion: " + ID_EXEC_EXTERNA );
 			GeneradorReporte generador = new GeneradorReporte();
-	    	generador.contruirReporte();
+	    	generador.construirReporte();
 		} catch (IOException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

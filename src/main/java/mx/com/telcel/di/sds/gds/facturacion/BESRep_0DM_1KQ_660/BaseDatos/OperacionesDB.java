@@ -15,6 +15,9 @@ import java.util.TreeMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Dao.Info_0DM_1KQ_660_Mapper;
+import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.PagosFacturadosVo;
+
 public class OperacionesDB {
 
 	private static OperacionesDB instance;
@@ -84,6 +87,23 @@ public class OperacionesDB {
 			e.printStackTrace();
 			throw e;
 		}
+		return lista;
+	}
+	
+	public List<PagosFacturadosVo> queryForRegiones(Connection connection, String query, String nombreArchivo) throws SQLException {
+		List<PagosFacturadosVo> lista = new ArrayList<>();
+		try (PreparedStatement ps = connection.prepareStatement(query)){
+			ps.setString(1, nombreArchivo);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					lista.add(Info_0DM_1KQ_660_Mapper.mapearRegioness(rs));
+				} 
+			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} 
 		return lista;
 	}
 }

@@ -1,0 +1,26 @@
+17:46:16.271 |INFO | [main] [main] (App.java:72):#### Iniciando con el proceso para generar el reporte BESRep_0DM_1KQ_660 ####
+17:46:16.275 |INFO | [main] [main] (App.java:80):Procesando el conjunto de archivos con ID de ejecucion: 20211018170438
+17:46:16.278 |INFO | [main] [<init>] (BaseDeDatosEmbebida.java:32):Creando la conexion a la base de datos: Reportes_0DM_1KQ_660[SQLITE]...
+17:46:16.821 |INFO | [main] [<init>] (BaseDeDatosEmbebida.java:46):La conexion a la base de datos Reportes_0DM_1KQ_660[SQLITE] ha sido exitosa
+17:46:16.826 |INFO | [main] [main] (App.java:88):#### Terminando con el proceso para generar el reporte BESRep_0DM_1KQ_660 ####
+17:48:21.268 |INFO | [main] [main] (App.java:72):#### Iniciando con el proceso para generar el reporte BESRep_0DM_1KQ_660 ####
+17:48:21.271 |INFO | [main] [main] (App.java:80):Procesando el conjunto de archivos con ID de ejecucion: 20211018170438
+17:48:21.277 |INFO | [main] [<init>] (BaseDeDatosEmbebida.java:32):Creando la conexion a la base de datos: Reportes_0DM_1KQ_660[SQLITE]...
+17:48:21.655 |INFO | [main] [<init>] (BaseDeDatosEmbebida.java:46):La conexion a la base de datos Reportes_0DM_1KQ_660[SQLITE] ha sido exitosa
+17:48:21.660 |INFO | [main] [main] (App.java:88):#### Terminando con el proceso para generar el reporte BESRep_0DM_1KQ_660 ####
+18:01:21.356 |INFO | [main] [main] (App.java:72):#### Iniciando con el proceso para generar el reporte BESRep_0DM_1KQ_660 ####
+18:01:21.359 |INFO | [main] [main] (App.java:80):Procesando el conjunto de archivos con ID de ejecucion: 20211018170438
+18:01:21.361 |INFO | [main] [<init>] (BaseDeDatosEmbebida.java:32):Creando la conexion a la base de datos: Reportes_0DM_1KQ_660[SQLITE]...
+18:01:21.759 |INFO | [main] [<init>] (BaseDeDatosEmbebida.java:46):La conexion a la base de datos Reportes_0DM_1KQ_660[SQLITE] ha sido exitosa
+18:01:21.760 |INFO | [main] [main] (App.java:88):#### Terminando con el proceso para generar el reporte BESRep_0DM_1KQ_660 ####
+18:01:47.771 |INFO | [main] [main] (App.java:72):#### Iniciando con el proceso para generar el reporte BESRep_0DM_1KQ_660 ####
+18:01:47.776 |INFO | [main] [main] (App.java:80):Procesando el conjunto de archivos con ID de ejecucion: 20211018170438
+18:01:47.778 |INFO | [main] [<init>] (BaseDeDatosEmbebida.java:32):Creando la conexion a la base de datos: Reportes_0DM_1KQ_660[SQLITE]...
+18:01:48.215 |INFO | [main] [<init>] (BaseDeDatosEmbebida.java:46):La conexion a la base de datos Reportes_0DM_1KQ_660[SQLITE] ha sido exitosa
+18:01:48.216 |INFO | [main] [main] (App.java:88):#### Terminando con el proceso para generar el reporte BESRep_0DM_1KQ_660 ####
+18:02:32.812 |INFO | [main] [main] (App.java:72):#### Iniciando con el proceso para generar el reporte BESRep_0DM_1KQ_660 ####
+18:02:32.816 |INFO | [main] [main] (App.java:80):Procesando el conjunto de archivos con ID de ejecucion: 20211018170438
+18:02:32.818 |INFO | [main] [<init>] (BaseDeDatosEmbebida.java:32):Creando la conexion a la base de datos: Reportes_0DM_1KQ_660[SQLITE]...
+18:02:33.217 |INFO | [main] [<init>] (BaseDeDatosEmbebida.java:46):La conexion a la base de datos Reportes_0DM_1KQ_660[SQLITE] ha sido exitosa
+18:02:33.218 |INFO | [main] [<init>] (ExtractorInfoReps_0DM_1KQ_660_Dao.java:27):CONSULTA PAGOS FACTURADOS
+18:02:33.218 |INFO | [main] [main] (App.java:88):#### Terminando con el proceso para generar el reporte BESRep_0DM_1KQ_660 ####

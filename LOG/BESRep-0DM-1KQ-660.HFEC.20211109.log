@@ -1,0 +1,9 @@
+10:57:16.284 |INFO | [main] [main] (App.java:72):#### Iniciando con el proceso para generar el reporte BESRep-0DM-1KQ-660 ####
+10:57:16.287 |INFO | [main] [main] (App.java:80):Procesando el conjunto de archivos con ID de ejecucion: 20211018170438
+10:57:16.288 |INFO | [main] [main] (App.java:88):#### Terminando con el proceso para generar el reporte BESRep-0DM-1KQ-660 ####
+11:42:31.278 |INFO | [main] [main] (App.java:72):#### Iniciando con el proceso para generar el reporte BESRep-0DM-1KQ-660 ####
+11:42:31.281 |INFO | [main] [main] (App.java:80):Procesando el conjunto de archivos con ID de ejecucion: 20211018170438
+11:42:31.284 |INFO | [main] [main] (App.java:88):#### Terminando con el proceso para generar el reporte BESRep-0DM-1KQ-660 ####
+13:27:32.318 |INFO | [main] [main] (App.java:72):#### Iniciando con el proceso para generar el reporte BESRep_0DM_1KQ_660 ####
+13:27:32.322 |INFO | [main] [main] (App.java:80):Procesando el conjunto de archivos con ID de ejecucion: 20211018170438
+13:27:32.323 |INFO | [main] [main] (App.java:88):#### Terminando con el proceso para generar el reporte BESRep_0DM_1KQ_660 ####

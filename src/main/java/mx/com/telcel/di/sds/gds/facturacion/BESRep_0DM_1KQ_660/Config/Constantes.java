@@ -10,7 +10,7 @@ public interface Constantes {
 	
 	public static final String DB_H2 = "H2";
 	public static final String DB_SQLITE = "SQLITE";
-	public static final String DB_NAME_APP = "Reportes0DM1KQ660";
+	public static final String DB_NAME_APP = "Reportes_0DM_1KQ_660";
 	public static final String EXT_ARCH_CTL = ".ctl";
 	
 	public static final String CADENA_VACIA = "";
