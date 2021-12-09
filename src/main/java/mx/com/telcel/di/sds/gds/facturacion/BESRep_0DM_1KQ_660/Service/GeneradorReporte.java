@@ -24,7 +24,7 @@ import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.BaseDatos.BaseDeD
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Config.Constantes;
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Dao.ExtractorInfoReps_0DM_1KQ_660_Dao;
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.ArchivoEscrito;
-import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.PagosFacturadosVo;
+import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.PagosFacturados;
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Utils.FileUtils;
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Config.TipoArchivo;
 
@@ -59,7 +59,7 @@ public class GeneradorReporte implements Constantes {
 	public void construirReporte() throws IOException, SQLException {
 		
 		iniciarBDDEmbebidaSqlite();
-		Map<TipoArchivo, Map<Byte, List<PagosFacturadosVo>>> reginon = obtenerRegionReportar();
+		Map<TipoArchivo, Map<Byte, List<PagosFacturados>>> reginon = obtenerRegionReportar();
 		List<ArchivoEscrito> archivosGenerados = consultaEscribeInformacion(reginon);
 		moverDone(archivosGenerados);
 	}
@@ -120,18 +120,18 @@ public class GeneradorReporte implements Constantes {
 		return str;
 	}
 	
-	private Map<TipoArchivo, Map<Byte, List<PagosFacturadosVo>>> obtenerRegionReportar() throws IOException, SQLException{
+	private Map<TipoArchivo, Map<Byte, List<PagosFacturados>>> obtenerRegionReportar() throws IOException, SQLException{
 		
 		Map<TipoArchivo, List<String>> archivosXProcesar = obtenerArchivosProcesar();
 		
-		Map<TipoArchivo, Map<Byte, List<PagosFacturadosVo>>> listaCiclosXTipoArchivo = new HashMap<>();
+		Map<TipoArchivo, Map<Byte, List<PagosFacturados>>> listaCiclosXTipoArchivo = new HashMap<>();
 
 		for(TipoArchivo tipoArchivo : archivosXProcesar.keySet()) {
 			List<String> archivos = archivosXProcesar.get(tipoArchivo);
-			Map<Byte, List<PagosFacturadosVo>> listaRegion = new HashMap<>();
+			Map<Byte, List<PagosFacturados>> listaRegion = new HashMap<>();
 			for(String archivo : archivos) {
 				Byte region = Byte.parseByte(archivo.substring(2,3));
-				List<PagosFacturadosVo> listaRegionsA = extractorDao.extraerRegionesXProcesar(archivo);
+				List<PagosFacturados> listaRegionsA = extractorDao.extraerRegionesXProcesar(archivo);
 				listaRegion.put(region, listaRegionsA );
 				LOG.info("Procesando el archivo : " + archivo + " de la region: " + region + " con " + listaRegionsA.size() + " region" );
 			}
@@ -141,7 +141,7 @@ public class GeneradorReporte implements Constantes {
 	}
 	
 	private Map<TipoArchivo, List<String>> obtenerArchivosProcesar() throws IOException, SQLException{
-		List<Map<String,String>> archivosXProc =  extractorDao.extraerArchivosXProcesar();
+		List<Map<String,String>> archivosXProc =  extractorDao.extraerTipoPagosXProcesar();
 		
 		Map<TipoArchivo, List<String>> archivosXProcesar = new HashMap<>();
 		
@@ -157,19 +157,19 @@ public class GeneradorReporte implements Constantes {
 		return archivosXProcesar;
 	}
 	
-	private List<ArchivoEscrito> consultaEscribeInformacion(Map<TipoArchivo, Map<Byte, List<PagosFacturadosVo>>> regionesXTipo) throws SQLException, IOException {
+	private List<ArchivoEscrito> consultaEscribeInformacion(Map<TipoArchivo, Map<Byte, List<PagosFacturados>>> regionesXTipo) throws SQLException, IOException {
 		
 		List<ArchivoEscrito> archivosGenerados = new ArrayList<ArchivoEscrito>();
 		try{
 			for(TipoArchivo tipoArchivo : regionesXTipo.keySet()) {
-				Map<Byte, List<PagosFacturadosVo>> cuentasXRegion = regionesXTipo.get(tipoArchivo);
+				Map<Byte, List<PagosFacturados>> cuentasXRegion = regionesXTipo.get(tipoArchivo);
 
-				Iterator<Map.Entry<Byte, List<PagosFacturadosVo>>> iterator = cuentasXRegion.entrySet().iterator();
+				Iterator<Map.Entry<Byte, List<PagosFacturados>>> iterator = cuentasXRegion.entrySet().iterator();
 				
 			    while (iterator.hasNext()) {
-			        Map.Entry<Byte, List<PagosFacturadosVo>> entry = iterator.next();
+			        Map.Entry<Byte, List<PagosFacturados>> entry = iterator.next();
 			        Byte region = entry.getKey();
-			        List<PagosFacturadosVo> listaCiclosRegion = entry.getValue();
+			        List<PagosFacturados> listaCiclosRegion = entry.getValue();
 			        
 			        LOG.info("Procesando la region : R0" +  region + " con una cantidad de " + listaCiclosRegion.size());
 			        SimpleDateFormat dateFormat = new SimpleDateFormat(MASK_FECHA_NAME_DONE);
@@ -182,7 +182,7 @@ public class GeneradorReporte implements Constantes {
 			        Files.write(Paths.get(pathArchivoReporte), "".getBytes(), StandardOpenOption.CREATE);
 					
 			        short pagina = 1;
-					for(PagosFacturadosVo ciclos : listaCiclosRegion) {
+					for(PagosFacturados ciclos : listaCiclosRegion) {
 						ciclos.setRegion(String.valueOf(region));
 					}
 					//Se escribe el archivo de control

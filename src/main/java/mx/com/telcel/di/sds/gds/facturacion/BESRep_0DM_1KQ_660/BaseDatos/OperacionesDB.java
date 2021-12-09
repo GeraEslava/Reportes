@@ -16,7 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Dao.Info_0DM_1KQ_660_Mapper;
-import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.PagosFacturadosVo;
+import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.PagosFacturados;
 
 public class OperacionesDB {
 
@@ -90,10 +90,10 @@ public class OperacionesDB {
 		return lista;
 	}
 	
-	public List<PagosFacturadosVo> queryForRegiones(Connection connection, String query, String nombreArchivo) throws SQLException {
-		List<PagosFacturadosVo> lista = new ArrayList<>();
+	public List<PagosFacturados> queryForRegiones(Connection connection, String query, String regiones) throws SQLException {
+		List<PagosFacturados> lista = new ArrayList<>();
 		try (PreparedStatement ps = connection.prepareStatement(query)){
-			ps.setString(1, nombreArchivo);
+			ps.setString(1, regiones);
 			
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
