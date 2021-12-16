@@ -40,6 +40,14 @@ public class GeneradorReporte implements Constantes {
 	private String EXT_ARCH_CTL;
 	private String MODO_APP;
 	private String MASK_FECHA_NAME_DONE = App.CONFIG.getProperty("MASK_FECHA_NAME_DONE");
+	private String PREFIX_ARCH_DONE_REPORTE_0DM_C = App.CONFIG.getProperty("PREFIX_ARCH_DONE_REPORTE_0DM_C");
+	private String PREFIX_ARCH_DONE_REPORTE_0DM_D = App.CONFIG.getProperty("PREFIX_ARCH_DONE_REPORTE_0DM_D");
+	private String PREFIX_ARCH_DONE_REPORTE_1KQ_QBK = App.CONFIG.getProperty("PREFIX_ARCH_DONE_REPORTE_1KQ_QBK");
+	private String PREFIX_ARCH_DONE_REPORTE_1KQ_QMD = App.CONFIG.getProperty("PREFIX_ARCH_DONE_REPORTE_1KQ_QMD");
+	private String PREFIX_ARCH_DONE_REPORTE_1KQ_QPR = App.CONFIG.getProperty("PREFIX_ARCH_DONE_REPORTE_1KQ_QPR");
+	private String PREFIX_ARCH_DONE_REPORTE_660_CCB = App.CONFIG.getProperty("PREFIX_ARCH_DONE_REPORTE_660_CCB");
+	private String PREFIX_ARCH_DONE_REPORTE_660_SCB = App.CONFIG.getProperty("PREFIX_ARCH_DONE_REPORTE_660_SCB");
+	private String PREFIX_ARCH_DONE_REPORTE_660_UCB = App.CONFIG.getProperty("PREFIX_ARCH_DONE_REPORTE_660_UCB");
 	private static final String TERMINADOR_LINEA_UNIX = "\n";
 	BaseDeDatosEmbebida dbBibesSqlite = null;
 	
@@ -130,6 +138,7 @@ public class GeneradorReporte implements Constantes {
 			List<String> archivos = archivosXProcesar.get(tipoArchivo);
 			Map<Byte, List<PagosFacturados>> listaRegion = new HashMap<>();
 			for(String archivo : archivos) {
+				LOG.debug(archivo);
 				Byte region = Byte.parseByte(archivo.substring(2,3));
 				List<PagosFacturados> listaRegionsA = extractorDao.extraerRegionesXProcesar(archivo);
 				listaRegion.put(region, listaRegionsA );
@@ -146,7 +155,7 @@ public class GeneradorReporte implements Constantes {
 		Map<TipoArchivo, List<String>> archivosXProcesar = new HashMap<>();
 		
 		for(Map<String,String> archivo : archivosXProc) {
-			String nombreArchivo = archivo.get("ARCHIVO");
+			String nombreArchivo = archivo.get("REGION");
 			TipoArchivo tipoArchivo = calculaTipoArchivo(nombreArchivo);
 			if(!archivosXProcesar.containsKey(tipoArchivo)) {
 				archivosXProcesar.put(tipoArchivo, new ArrayList<>());
@@ -175,8 +184,8 @@ public class GeneradorReporte implements Constantes {
 			        SimpleDateFormat dateFormat = new SimpleDateFormat(MASK_FECHA_NAME_DONE);
 					String fechaGeneracion = dateFormat.format(new Date());		
 					
-			        String pathArchivoReporte = pathWork + File.separator + PREFIX_ARCH_DONE + region + "_" + tipoArchivo.getIdTipoArchivo() + "_" + fechaGeneracion + EXT_ARCH_DONE;
-			        String pahtArchivoCtl = pathWork + File.separator + PREFIX_ARCH_DONE + region + "_" + tipoArchivo.getIdTipoArchivo() + "_" + fechaGeneracion + EXT_ARCH_CTL;
+			        String pathArchivoReporte = pathWork + File.separator + PREFIX_ARCH_DONE_REPORTE_0DM_C + region + "_" + tipoArchivo.getIdTipoArchivo() + "_" + fechaGeneracion + EXT_ARCH_DONE;
+			        String pahtArchivoCtl = pathWork + File.separator + PREFIX_ARCH_DONE_REPORTE_0DM_C + region + "_" + tipoArchivo.getIdTipoArchivo() + "_" + fechaGeneracion + EXT_ARCH_CTL;
 			        
 			        LOG.info("-- Iniciando con la escritura del archivo : " + pathArchivoReporte );
 			        Files.write(Paths.get(pathArchivoReporte), "".getBytes(), StandardOpenOption.CREATE);

@@ -9,7 +9,7 @@ public interface Consultas {
 			.toString();
 	
 	public static final String SQL_OBTENER_REGIONES = 
-			new StringBuilder(" select REGION, CICLO, GRUPO_ING, MES_FACTURA, MES_PAGO, MONTO_PAGADO, IMP_PAGADO, PAGO_SIN_IMP, TIPO_PAGO ") 
+			new StringBuilder(" select * ") 
 			.append(" FROM PAGOS_FACTURADOS where REGION = ? ")
 			.toString();
 	

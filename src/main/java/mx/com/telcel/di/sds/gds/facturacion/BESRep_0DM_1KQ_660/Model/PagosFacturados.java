@@ -1,7 +1,7 @@
 package mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model;
 
 public class PagosFacturados {
-	private Long pagosFacturadosId;
+//	private Long pagosFacturadosId;
 //	private String region;
 //	private Double ciclo;
 //	private String grupoIng;
@@ -30,13 +30,13 @@ public class PagosFacturados {
 		this.region = region;
 	}
 
-	public Long getPagosFacturadosId() {
-		return pagosFacturadosId;
-	}
-
-	public void setPagosFacturadosId(Long pagosFacturadosId) {
-		this.pagosFacturadosId = pagosFacturadosId;
-	}
+//	public Long getPagosFacturadosId() {
+//		return pagosFacturadosId;
+//	}
+//
+//	public void setPagosFacturadosId(Long pagosFacturadosId) {
+//		this.pagosFacturadosId = pagosFacturadosId;
+//	}
 
 //	public Double getCiclo() {
 //		return ciclo;
@@ -104,7 +104,7 @@ public class PagosFacturados {
 
 	@Override
 	public String toString() {
-		return "PagosFacturados [pagosFacturadosId=" + pagosFacturadosId + ", region=" + region + ", ciclo=" + ciclo
+		return "PagosFacturados [ region=" + region + ", ciclo=" + ciclo
 				+ ", grupoIng=" + grupoIng + ", mesFactura=" + mesFactura + ", mesPago=" + mesPago + ", montoPagado="
 				+ montoPagado + ", impPagado=" + impPagado + ", pagoSinImp=" + pagoSinImp + ", tipoPago=" + tipoPago + "]";
 	}
