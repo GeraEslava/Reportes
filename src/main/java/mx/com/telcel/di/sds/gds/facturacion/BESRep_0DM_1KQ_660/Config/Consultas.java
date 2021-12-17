@@ -15,6 +15,6 @@ public interface Consultas {
 	
 	public static final String SQL_OBTENER_TIPO_PAGO = 
 			new StringBuilder(" select REGION, CICLO, GRUPO_ING, MES_FACTURA, MES_PAGO, MONTO_PAGADO, IMP_PAGADO, PAGO_SIN_IMP, TIPO_PAGO ") 
-			.append(" FROM PAGOS_FACTURADOS where TIPO_PAGO = ? ")
+			.append(" FROM PAGOS_FACTURADOS where TIPO_PAGO = 'NORMAL' ")
 			.toString();
 }
