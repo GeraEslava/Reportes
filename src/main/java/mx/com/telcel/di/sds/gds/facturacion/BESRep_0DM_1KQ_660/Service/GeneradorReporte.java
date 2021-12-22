@@ -110,7 +110,7 @@ public class GeneradorReporte implements Constantes {
 		for (ArchivoEscrito archivoEscrito : archivosGenerados) {
 			FileUtils.moveFileToDirectory(Paths.get(archivoEscrito.getPathFile()).toFile(), pathDoneFinal);
 			archivoEscrito.setPathFile(pathDoneFinal + File.separator + Paths.get(archivoEscrito.getPathFile()).toFile().getName());
-			archivosXEnviar.append(escribirArchivoProcesado(archivoEscrito));
+			//archivosXEnviar.append(escribirArchivoProcesado(archivoEscrito));
 		}
 		if(archivosXEnviar.length() > 0) {
 			Files.write(Paths.get(pathArchListaProcesados), archivosXEnviar.toString().getBytes(), StandardOpenOption.CREATE);
@@ -182,9 +182,9 @@ public class GeneradorReporte implements Constantes {
 			        List<PagosFacturados> listaCiclosRegion = entry.getValue();
 			        
 			        LOG.info("Procesando la region : R0" +  region + " con una cantidad de " + listaCiclosRegion.size());
-			        SimpleDateFormat dateFormat = new SimpleDateFormat(MASK_FECHA_NAME_DONE);
+			        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
 					String fechaGeneracion = dateFormat.format(new Date());		
-					
+			    					
 			        String pathArchivoReporte = pathWork + File.separator + PREFIX_ARCH_DONE_REPORTE_0DM_C + region + "_"  + "_" + fechaGeneracion + EXT_ARCH_DONE;
 			        String pahtArchivoCtl = pathWork + File.separator + PREFIX_ARCH_DONE_REPORTE_0DM_C + region + "_"  + "_" + fechaGeneracion + EXT_ARCH_CTL;
 			        
@@ -194,9 +194,10 @@ public class GeneradorReporte implements Constantes {
 			        short pagina = 1;
 					for(PagosFacturados ciclos : listaCiclosRegion) {
 						ciclos.setRegion(String.valueOf(region));
-						Reporte0DM reporte = mapearInfoReporte("CICLO","ciclo");
+						PagosFacturados reporte = mapearInfoReporte(ciclos);
 						VelocityDesignerService.generarReporte(reporte, pathArchivoReporte, pagina);
 //						ReportDesigner.escribirReporte(reporte, pathArchivoReporte, pagina);
+						
 						pagina++;
 					}
 					//Se escribe el archivo de control
@@ -204,7 +205,7 @@ public class GeneradorReporte implements Constantes {
 					Files.write(Paths.get(pahtArchivoCtl), "".getBytes(), StandardOpenOption.CREATE);
 					
 					archivosGenerados.add(new ArchivoEscrito("R0" +  region, pathArchivoReporte, "TXT", tipoArchivo));
-					archivosGenerados.add(new ArchivoEscrito("R0" +  region, pahtArchivoCtl, "CTL",tipoArchivo));
+					//archivosGenerados.add(new ArchivoEscrito("R0" +  region, pahtArchivoCtl, "CTL",tipoArchivo));
 					
 			    }
 			}
@@ -220,17 +221,27 @@ public class GeneradorReporte implements Constantes {
 		return archivosGenerados;
 	}
 	
-	private Reporte0DM mapearInfoReporte(String string, String string2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	private Reporte0DM mapearInfoReporte(String string, String string2) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	private PagosFacturados mapearInfoReporte(PagosFacturados ciclo) throws SQLException  {
 		PagosFacturados reporte = new PagosFacturados();
 		
-		List<Map<String, String>> reperte0dm = extractorDao.extraerPagosFacturados();
+		
+		List<Map<String, String>> reperte0dm = extractorDao.extraerTipoPagosXProcesar();
+		
 		
 		return reporte;
-}
-	
+}	
+	private List<Reporte0DM> completarDetalleRev(List<Reporte0DM> detalleActual, Reporte0DM cuenta){
+		byte indiceDetActual = 0;
+		int tamDetalleActual = detalleActual.size();
+		
+		List<Reporte0DM> detalleActual1 = new ArrayList<>();
+		//LOG.debug(detalleActual1);
+		return detalleActual1;
+		
+	}
 }

@@ -11,6 +11,12 @@ import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.ReporteData
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Utils.StringUtils;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Date;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -24,7 +30,7 @@ public class VelocityDesignerService implements Constantes{
 	private static VelocityContext vc = null;
 	private static Template plantillaReporte = null;
 	
-	public static void generarReporte(Reporte0DM reporte, String pathArchSal , int pagina) throws IOException {
+	public static void generarReporte(PagosFacturados reporte, String pathArchSal , int pagina) throws IOException {
 		if(vc == null) {
 			VelocityEngine ve = new VelocityEngine();
 			ve.setProperty(RuntimeConstants.FILE_RESOURCE_LOADER_PATH, App.PATH_TEMPLATE);
@@ -34,13 +40,19 @@ public class VelocityDesignerService implements Constantes{
 			vc = new VelocityContext();
 			vc.put("String", String.class);
 			vc.put("StrUtl", StringUtils.class);
+			llenar0Dm(reporte, pathArchSal, pagina);
 		}
 		
 	}
 	
-	public static void llenar0Dm(PagosFacturados reporte, String pathArchSal , int pagina) {
+	public static void llenar0Dm(PagosFacturados reporte, String pathArchSal , int pagina) throws IOException {
 		
 		//vc.put("f_a_fin",reporte.getPenalizaciones().getfAmtFineqAmigoFacil());
+		Date fechaGen = new Date();
+		String anioGeneracion = StringUtils.generarFechaEnFormato(fechaGen,"yyyy");
+		String mesGeneracion = StringUtils.generarFechaEnFormato(fechaGen,"yyyy");
+		vc.put("anioGeneracion", anioGeneracion);
+		vc.put("mesGeneracion", mesGeneracion);
 		vc.put("REGION", reporte.getRegion());
 		vc.put("CICLO", reporte.getCiclo());
 		vc.put("GRUPO_ING", reporte.getGrupoIng());
@@ -50,6 +62,9 @@ public class VelocityDesignerService implements Constantes{
 		vc.put("IMP_PAGADO", reporte.getImpPagado());
 		vc.put("PAGO_SIN_IMP", reporte.getPagoSinImp());
 		vc.put("TIPO_PAGO", reporte.getTipoPago());
+		StringWriter sw = new StringWriter();
+		plantillaReporte.merge(vc, sw);
+        Files.write(Paths.get(pathArchSal), sw.toString().getBytes(), StandardOpenOption.APPEND );
 	}
 	
 }

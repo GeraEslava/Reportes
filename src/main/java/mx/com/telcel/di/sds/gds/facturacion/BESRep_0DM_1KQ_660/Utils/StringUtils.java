@@ -7,6 +7,7 @@ import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.App;
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Config.Constantes;
 
 import java.math.RoundingMode;
+import java.text.DateFormatSymbols;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,6 +29,16 @@ public class StringUtils implements Constantes {
 		decimalFormatterSepMiles.setRoundingMode(RoundingMode.DOWN);
 		
 	}
+	
+	 public static String getMonthForInt(int num) {
+	        String month = "wrong";
+	        DateFormatSymbols dfs = new DateFormatSymbols();
+	        String[] months = dfs.getMonths();
+	        if (num >= 0 && num <= 11 ) {
+	            month = months[num];
+	        }
+	        return month;
+	    }
 	
 	public static String generarFechaEnFormato(Date fecha, String format) {
 		if(fecha == null) {

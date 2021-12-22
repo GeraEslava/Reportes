@@ -39,10 +39,10 @@ public class ExtractorInfoReps_0DM_1KQ_660_Dao implements Consultas, Constantes 
 		return OperacionesDB.getInstance().queryForRegiones(conBibes, consulta, pago);
 	}
 	
-	public List<Map<String, String>> extraerPagosFacturados() throws SQLException {
+	public List<PagosFacturados> extraerPagosFacturados(String pago) throws SQLException {
 		String consulta = SQL_OBTENER_PAGOSFACTURADOS;
 		LOG.info("Tenemnos la consulta : " + consulta);
-		return OperacionesDB.getInstance().queryForList(conBibes, consulta, null);
+		return OperacionesDB.getInstance().queryForRegiones(conBibes, consulta, pago);
 	}
 	
 	public List<Map<String,String>> extraerTipoPagosXProcesar() throws SQLException {

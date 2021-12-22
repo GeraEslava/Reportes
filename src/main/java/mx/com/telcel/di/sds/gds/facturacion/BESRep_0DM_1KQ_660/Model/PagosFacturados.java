@@ -26,8 +26,8 @@ public class PagosFacturados {
 		return region;
 	}
 
-	public void setRegion(String region) {
-		this.region = region;
+	public void setRegion(String string) {
+		this.region = string;
 	}
 
 //	public Long getPagosFacturadosId() {
