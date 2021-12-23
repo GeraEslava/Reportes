@@ -2,7 +2,6 @@ package mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model;
 
 public class Reporte0DM {
 
-	private Long reporte0dmId;
 	private Double ciclo;
 	private String grupoIng;
 	private String total;
@@ -11,13 +10,6 @@ public class Reporte0DM {
 	private String mes;
 	private String año;
 
-	public Long getReporte0dmId() {
-		return reporte0dmId;
-	}
-
-	public void setReporte0dmId(Long reporte0dmId) {
-		this.reporte0dmId = reporte0dmId;
-	}
 
 	public Double getCiclo() {
 		return ciclo;

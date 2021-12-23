@@ -2,21 +2,12 @@ package mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model;
 
 public class Reporte1KQ {
 
-	private Long reporte1kqId;
 	private Double cf;
 	private String grupoIng;
 	private String ajustes;
 	private String total;
 	private String mes;
 	private String año;
-
-	public Long getReporte1kqId() {
-		return reporte1kqId;
-	}
-
-	public void setReporte1kqId(Long reporte1kqId) {
-		this.reporte1kqId = reporte1kqId;
-	}
 
 	public Double getCf() {
 		return cf;

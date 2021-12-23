@@ -5,7 +5,8 @@ public enum TipoArchivo {
 	
 	REPORETE_ODM("ODM")
 	,REPORETE_1KQ("1KQ")
-	,REPORETE_660("660");
+	,REPORETE_660("660")
+	,REPORETE_21K("21K");
 	
 	private String idTipoArchivo;
 	

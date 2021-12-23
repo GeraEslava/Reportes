@@ -32,7 +32,7 @@ import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Config.TipoArchiv
 public class GeneradorReporte implements Constantes {
 	private static final Logger LOG = LoggerFactory.getLogger("funcionalLogger");
 	ExtractorInfoReps_0DM_1KQ_660_Dao extractorDao;
-	
+
 	private String pathInput;
 	private String pathWork;
 	private String pathDone;
@@ -49,12 +49,13 @@ public class GeneradorReporte implements Constantes {
 	private String PREFIX_ARCH_DONE_REPORTE_660_CCB = App.CONFIG.getProperty("PREFIX_ARCH_DONE_REPORTE_660_CCB");
 	private String PREFIX_ARCH_DONE_REPORTE_660_SCB = App.CONFIG.getProperty("PREFIX_ARCH_DONE_REPORTE_660_SCB");
 	private String PREFIX_ARCH_DONE_REPORTE_660_UCB = App.CONFIG.getProperty("PREFIX_ARCH_DONE_REPORTE_660_UCB");
+	private String PREFIX_ARCH_DONE_REPORTE_21K = App.CONFIG.getProperty("PREFIX_ARCH_DONE_REPORTE_21K");
 	private static final String TERMINADOR_LINEA_UNIX = "\n";
 	BaseDeDatosEmbebida dbBibesSqlite = null;
-	
+
 	Connection conBibes = null;
 	List<LocalDate> mesesReporte = new ArrayList<>();
-	
+
 	public GeneradorReporte() {
 		this.pathInput = App.CONFIG.getProperty("PATH_INPUT");
 		this.pathWork = App.CONFIG.getProperty("PATH_WORK");
@@ -64,28 +65,28 @@ public class GeneradorReporte implements Constantes {
 		EXT_ARCH_CTL = App.CONFIG.getProperty("EXT_CTL_DONE");
 		MODO_APP = App.CONFIG.getProperty("MODO_APP");
 	}
-	
+
 	public void construirReporte() throws IOException, SQLException {
-		
+
 		iniciarBDDEmbebidaSqlite();
 		Map<TipoArchivo, Map<Byte, List<PagosFacturados>>> region = obtenerRegionReportar();
 		List<ArchivoEscrito> archivosGenerados = consultaEscribeInformacion(region);
 		moverDone(archivosGenerados);
 	}
-	
+
 	private void iniciarBDDEmbebidaSqlite() throws SQLException {
-		
-		String pathDb = this.pathWork + File.separator + "base." + App.APP_NAME + "." + App.ID_EXEC_EXTERNA +".db";
+
+		String pathDb = this.pathWork + File.separator + "base." + App.APP_NAME + "." + App.ID_EXEC_EXTERNA + ".db";
 		dbBibesSqlite = new BaseDeDatosEmbebida(DB_NAME_APP, DB_SQLITE, pathDb);
-		conBibes = dbBibesSqlite.getConnection() ;
+		conBibes = dbBibesSqlite.getConnection();
 		extractorDao = new ExtractorInfoReps_0DM_1KQ_660_Dao(conBibes);
-		
+
 	}
-	
+
 	private TipoArchivo calculaTipoArchivo(String nombreArchivo) {
-		if(nombreArchivo != null) {
+		if (nombreArchivo != null) {
 			String[] compTipoArchivo = nombreArchivo.split("_");
-			if(compTipoArchivo.length != 3) {
+			if (compTipoArchivo.length != 3) {
 				return null;
 			}
 			String tipoArchivo = compTipoArchivo[2].replace(".txt", "");
@@ -93,72 +94,68 @@ public class GeneradorReporte implements Constantes {
 		}
 		return null;
 	}
-	
+
 	private void moverDone(List<ArchivoEscrito> archivosGenerados) throws IOException {
-		
-		String pathDoneFinal = pathDone + File.separator + App.FCH_ENTREGA;		
+
+		String pathDoneFinal = pathDone + File.separator + App.FCH_ENTREGA;
 		FileUtils.crearDirectorio(pathDoneFinal);
-		//Aqui escribimos la lista de archivos a enviar
-		String pathArchListaProcesados = pathWork 
-										+ File.separator 
-										+ "ListaArchivosPorEnviar" + "_"
-										+ App.APP_NAME + "_" 
-										+ App.ID_EXEC_EXTERNA 
-										+ EXT_ARCH_DONE;
-		//Se mueven los archivos de entrada para conservarlos en la ejecucion
+		// Aqui escribimos la lista de archivos a enviar
+		String pathArchListaProcesados = pathWork + File.separator + "ListaArchivosPorEnviar" + "_" + App.APP_NAME + "_"
+				+ App.ID_EXEC_EXTERNA + EXT_ARCH_DONE;
+		// Se mueven los archivos de entrada para conservarlos en la ejecucion
 		StringBuilder archivosXEnviar = new StringBuilder();
 		for (ArchivoEscrito archivoEscrito : archivosGenerados) {
 			FileUtils.moveFileToDirectory(Paths.get(archivoEscrito.getPathFile()).toFile(), pathDoneFinal);
-			archivoEscrito.setPathFile(pathDoneFinal + File.separator + Paths.get(archivoEscrito.getPathFile()).toFile().getName());
-			//archivosXEnviar.append(escribirArchivoProcesado(archivoEscrito));
+			archivoEscrito.setPathFile(
+					pathDoneFinal + File.separator + Paths.get(archivoEscrito.getPathFile()).toFile().getName());
+			// archivosXEnviar.append(escribirArchivoProcesado(archivoEscrito));
 		}
-		if(archivosXEnviar.length() > 0) {
-			Files.write(Paths.get(pathArchListaProcesados), archivosXEnviar.toString().getBytes(), StandardOpenOption.CREATE);
+		if (archivosXEnviar.length() > 0) {
+			Files.write(Paths.get(pathArchListaProcesados), archivosXEnviar.toString().getBytes(),
+					StandardOpenOption.CREATE);
 		}
 	}
-	
+
 	private StringBuilder escribirArchivoProcesado(ArchivoEscrito archivoEscrito) {
-		StringBuilder str = new StringBuilder(archivoEscrito.getPathFile())
-				.append(SEPARADOR_LISTA_ARCHIVOS)
-				.append(archivoEscrito.getRegion())
-				.append(SEPARADOR_LISTA_ARCHIVOS)
-				.append(archivoEscrito.getTipoArchivo().getIdTipoArchivo())
-				.append(SEPARADOR_LISTA_ARCHIVOS)
-				.append(archivoEscrito.getExtensionArchivo())
-				.append(TERMINADOR_LINEA_UNIX);
+		StringBuilder str = new StringBuilder(archivoEscrito.getPathFile()).append(SEPARADOR_LISTA_ARCHIVOS)
+				.append(archivoEscrito.getRegion()).append(SEPARADOR_LISTA_ARCHIVOS)
+				.append(archivoEscrito.getTipoArchivo().getIdTipoArchivo()).append(SEPARADOR_LISTA_ARCHIVOS)
+				.append(archivoEscrito.getExtensionArchivo()).append(TERMINADOR_LINEA_UNIX);
 		return str;
 	}
-	
-	private Map<TipoArchivo, Map<Byte, List<PagosFacturados>>> obtenerRegionReportar() throws IOException, SQLException{
-		
+
+	private Map<TipoArchivo, Map<Byte, List<PagosFacturados>>> obtenerRegionReportar()
+			throws IOException, SQLException {
+
 		Map<TipoArchivo, List<String>> archivosXProcesar = obtenerArchivosProcesar();
-		
+
 		Map<TipoArchivo, Map<Byte, List<PagosFacturados>>> listaCiclosXTipoArchivo = new HashMap<>();
 
-		for(TipoArchivo tipoArchivo : archivosXProcesar.keySet()) {
+		for (TipoArchivo tipoArchivo : archivosXProcesar.keySet()) {
 			List<String> archivos = archivosXProcesar.get(tipoArchivo);
 			Map<Byte, List<PagosFacturados>> listaRegion = new HashMap<>();
-			for(String archivo : archivos) {
+			for (String archivo : archivos) {
 				LOG.debug(archivo);
-				Byte region = Byte.parseByte(archivo.substring(2,3));
+				Byte region = Byte.parseByte(archivo.substring(2, 3));
 				List<PagosFacturados> listaRegionsA = extractorDao.extraerRegionesXProcesar(archivo);
-				listaRegion.put(region, listaRegionsA );
-				LOG.info("Procesando el archivo : " + archivo + " de la region: " + region + " con " + listaRegionsA.size() + " region" );
+				listaRegion.put(region, listaRegionsA);
+				LOG.info("Procesando el archivo : " + archivo + " de la region: " + region + " con "
+						+ listaRegionsA.size() + " region");
 			}
 			listaCiclosXTipoArchivo.put(tipoArchivo, listaRegion);
 		}
 		return listaCiclosXTipoArchivo;
 	}
-	
-	private Map<TipoArchivo, List<String>> obtenerArchivosProcesar() throws IOException, SQLException{
-		List<Map<String,String>> archivosXProc =  extractorDao.extraerTipoPagosXProcesar();
-		
+
+	private Map<TipoArchivo, List<String>> obtenerArchivosProcesar() throws IOException, SQLException {
+		List<Map<String, String>> archivosXProc = extractorDao.extraerTipoPagosXProcesar();
+
 		Map<TipoArchivo, List<String>> archivosXProcesar = new HashMap<>();
-		
-		for(Map<String,String> archivo : archivosXProc) {
+
+		for (Map<String, String> archivo : archivosXProc) {
 			String nombreArchivo = archivo.get("REGION");
 			TipoArchivo tipoArchivo = calculaTipoArchivo(nombreArchivo);
-			if(!archivosXProcesar.containsKey(tipoArchivo)) {
+			if (!archivosXProcesar.containsKey(tipoArchivo)) {
 				archivosXProcesar.put(tipoArchivo, new ArrayList<>());
 			}
 			List<String> archivos = archivosXProcesar.get(tipoArchivo);
@@ -166,82 +163,116 @@ public class GeneradorReporte implements Constantes {
 		}
 		return archivosXProcesar;
 	}
-	
-	private List<ArchivoEscrito> consultaEscribeInformacion(Map<TipoArchivo, Map<Byte, List<PagosFacturados>>> regionesXTipo) throws SQLException, IOException {
-		
+
+	private List<ArchivoEscrito> consultaEscribeInformacion(
+			Map<TipoArchivo, Map<Byte, List<PagosFacturados>>> regionesXTipo) throws SQLException, IOException {
+
 		List<ArchivoEscrito> archivosGenerados = new ArrayList<ArchivoEscrito>();
-		try{
-			for(TipoArchivo tipoArchivo : regionesXTipo.keySet()) {
+		try {
+
+			for (TipoArchivo tipoArchivo : regionesXTipo.keySet()) {
 				Map<Byte, List<PagosFacturados>> cuentasXRegion = regionesXTipo.get(tipoArchivo);
 
 				Iterator<Map.Entry<Byte, List<PagosFacturados>>> iterator = cuentasXRegion.entrySet().iterator();
-				
-			    while (iterator.hasNext()) {
-			        Map.Entry<Byte, List<PagosFacturados>> entry = iterator.next();
-			        Byte region = entry.getKey();
-			        List<PagosFacturados> listaCiclosRegion = entry.getValue();
-			        
-			        LOG.info("Procesando la region : R0" +  region + " con una cantidad de " + listaCiclosRegion.size());
-			        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
-					String fechaGeneracion = dateFormat.format(new Date());		
-			    					
-			        String pathArchivoReporte = pathWork + File.separator + PREFIX_ARCH_DONE_REPORTE_0DM_C + region + "_"  + "_" + fechaGeneracion + EXT_ARCH_DONE;
-			        String pahtArchivoCtl = pathWork + File.separator + PREFIX_ARCH_DONE_REPORTE_0DM_C + region + "_"  + "_" + fechaGeneracion + EXT_ARCH_CTL;
-			        
-			        LOG.info("-- Iniciando con la escritura del archivo : " + pathArchivoReporte );
-			        Files.write(Paths.get(pathArchivoReporte), "".getBytes(), StandardOpenOption.CREATE);
-					
-			        short pagina = 1;
-					for(PagosFacturados ciclos : listaCiclosRegion) {
+
+				while (iterator.hasNext()) {
+					Map.Entry<Byte, List<PagosFacturados>> entry = iterator.next();
+					Byte region = entry.getKey();
+					List<PagosFacturados> listaCiclosRegion = entry.getValue();
+
+					LOG.info("Procesando la region : R0" + region + " con una cantidad de " + listaCiclosRegion.size());
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
+					String fechaGeneracion = dateFormat.format(new Date());
+
+					//// 0DM
+
+					String pathArchivoReporte = pathWork + File.separator + PREFIX_ARCH_DONE_REPORTE_0DM_C + region
+							+ "_" + "_" + fechaGeneracion + EXT_ARCH_DONE;
+					String pahtArchivoCtl = pathWork + File.separator + PREFIX_ARCH_DONE_REPORTE_0DM_C + region + "_"
+							+ "_" + fechaGeneracion + EXT_ARCH_CTL;
+
+					escrituraLog(pathArchivoReporte);
+
+					short pagina = 1;
+					for (PagosFacturados ciclos : listaCiclosRegion) {
 						ciclos.setRegion(String.valueOf(region));
 						PagosFacturados reporte = mapearInfoReporte(ciclos);
 						VelocityDesignerService.generarReporte(reporte, pathArchivoReporte, pagina);
 //						ReportDesigner.escribirReporte(reporte, pathArchivoReporte, pagina);
-						
+
 						pagina++;
 					}
-					//Se escribe el archivo de control
+					// Se escribe el archivo de control
 					LOG.info("Escribiendo el archivo de control : " + pahtArchivoCtl);
 					Files.write(Paths.get(pahtArchivoCtl), "".getBytes(), StandardOpenOption.CREATE);
-					
-					archivosGenerados.add(new ArchivoEscrito("R0" +  region, pathArchivoReporte, "TXT", tipoArchivo));
-					//archivosGenerados.add(new ArchivoEscrito("R0" +  region, pahtArchivoCtl, "CTL",tipoArchivo));
-					
-			    }
+
+					archivosGenerados.add(new ArchivoEscrito("R0" + region, pathArchivoReporte, "TXT", tipoArchivo));
+					// archivosGenerados.add(new ArchivoEscrito("R0" + region, pahtArchivoCtl,
+					// "CTL",tipoArchivo));
+
+					//// 1KQ
+
+					pathArchivoReporte = pathWork + File.separator + PREFIX_ARCH_DONE_REPORTE_1KQ_QBK + region + "_"
+							+ "_" + fechaGeneracion + EXT_ARCH_DONE;
+
+					pahtArchivoCtl = pathWork + File.separator + PREFIX_ARCH_DONE_REPORTE_1KQ_QBK + region + "_" + "_"
+							+ fechaGeneracion + EXT_ARCH_CTL;
+
+					escrituraLog(pathArchivoReporte);
+
+					// 660
+
+					pathArchivoReporte = pathWork + File.separator + PREFIX_ARCH_DONE_REPORTE_660_CCB + region + "_"
+							+ "_" + fechaGeneracion + EXT_ARCH_DONE;
+
+					pahtArchivoCtl = pathWork + File.separator + PREFIX_ARCH_DONE_REPORTE_660_CCB + region + "_" + "_"
+							+ fechaGeneracion + EXT_ARCH_CTL;
+
+					escrituraLog(pathArchivoReporte);
+
+					// 21K
+
+					pathArchivoReporte = pathWork + File.separator + PREFIX_ARCH_DONE_REPORTE_21K + region + "_" + "_"
+							+ fechaGeneracion + EXT_ARCH_DONE;
+
+					pahtArchivoCtl = pathWork + File.separator + PREFIX_ARCH_DONE_REPORTE_21K + region + "_" + "_"
+							+ fechaGeneracion + EXT_ARCH_CTL;
+
+					escrituraLog(pathArchivoReporte);
+
+				}
 			}
 		} finally {
-			if(conBibes != null ) {
+			if (conBibes != null) {
 				try {
 					conBibes.close();
 				} catch (Exception e2) {
-					LOG.info(" Error al tratar de cerrar la conexion : " , e2 );
+					LOG.info(" Error al tratar de cerrar la conexion : ", e2);
 				}
 			}
-		} 
+		}
 		return archivosGenerados;
 	}
-	
-//	private Reporte0DM mapearInfoReporte(String string, String string2) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
-	private PagosFacturados mapearInfoReporte(PagosFacturados ciclo) throws SQLException  {
+	private PagosFacturados mapearInfoReporte(PagosFacturados ciclo) throws SQLException {
 		PagosFacturados reporte = new PagosFacturados();
-		
-		
+
 		List<Map<String, String>> reperte0dm = extractorDao.extraerTipoPagosXProcesar();
-		
-		
+
 		return reporte;
-}	
-	private List<Reporte0DM> completarDetalleRev(List<Reporte0DM> detalleActual, Reporte0DM cuenta){
+	}
+
+	private List<Reporte0DM> completarDetalleRev(List<Reporte0DM> detalleActual, Reporte0DM cuenta) {
 		byte indiceDetActual = 0;
 		int tamDetalleActual = detalleActual.size();
-		
+
 		List<Reporte0DM> detalleActual1 = new ArrayList<>();
-		//LOG.debug(detalleActual1);
+		// LOG.debug(detalleActual1);
 		return detalleActual1;
-		
+	}
+
+	private void escrituraLog(String pathArchivoReporte) throws IOException {
+		LOG.info("-- Iniciando con la escritura del archivo : " + pathArchivoReporte);
+		Files.write(Paths.get(pathArchivoReporte), "".getBytes(), StandardOpenOption.CREATE);
 	}
 }

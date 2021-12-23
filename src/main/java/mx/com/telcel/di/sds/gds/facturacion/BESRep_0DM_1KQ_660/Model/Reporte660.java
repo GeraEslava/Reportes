@@ -2,20 +2,11 @@ package mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model;
 
 public class Reporte660 {
 
-	private Long reporte660Id;
 	private String region;
 	private Double ciclo;
 	private String total;
 	private String mes;
 	private String año;
-
-	public Long getReporte660Id() {
-		return reporte660Id;
-	}
-
-	public void setReporte660Id(Long reporte660Id) {
-		this.reporte660Id = reporte660Id;
-	}
 
 	public String getRegion() {
 		return region;
