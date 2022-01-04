@@ -1,7 +1,7 @@
 package mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model;
 
 public class PagosFacturados {
-//	private Long pagosFacturadosId;
+//	private String pagosFacturadosId;
 //	private String region;
 //	private Double ciclo;
 //	private String grupoIng;
@@ -13,28 +13,28 @@ public class PagosFacturados {
 //	private String tipoPago;
 	
 	private String region;
-	private Long ciclo;
-	private Long grupoIng;
-	private Long mesFactura;
-	private Long mesPago;
-	private Long montoPagado;
-	private Long impPagado;
-	private Long pagoSinImp;
-	private Long tipoPago;
+	private String ciclo;
+	private String grupoIng;
+	private String mesFactura;
+	private String mesPago;
+	private Double montoPagado;
+	private Double impPagado;
+	private Double pagoSinImp;
+	private String tipoPago;
 	
 	public String getRegion() {
 		return region;
 	}
 
-	public void setRegion(String string) {
-		this.region = string;
+	public void setRegion(String ciclos) {
+		this.region = ciclos;
 	}
 
-//	public Long getPagosFacturadosId() {
+//	public String getPagosFacturadosId() {
 //		return pagosFacturadosId;
 //	}
 //
-//	public void setPagosFacturadosId(Long pagosFacturadosId) {
+//	public void setPagosFacturadosId(String pagosFacturadosId) {
 //		this.pagosFacturadosId = pagosFacturadosId;
 //	}
 
@@ -109,67 +109,67 @@ public class PagosFacturados {
 				+ montoPagado + ", impPagado=" + impPagado + ", pagoSinImp=" + pagoSinImp + ", tipoPago=" + tipoPago + "]";
 	}
 
-	public Long getCiclo() {
+	public String getCiclo() {
 		return ciclo;
 	}
 
-	public void setCiclo(Long ciclo) {
+	public void setCiclo(String ciclo) {
 		this.ciclo = ciclo;
 	}
 
-	public Long getGrupoIng() {
+	public String getGrupoIng() {
 		return grupoIng;
 	}
 
-	public void setGrupoIng(Long grupoIng) {
+	public void setGrupoIng(String grupoIng) {
 		this.grupoIng = grupoIng;
 	}
 
-	public Long getMesFactura() {
+	public String getMesFactura() {
 		return mesFactura;
 	}
 
-	public void setMesFactura(Long mesFactura) {
+	public void setMesFactura(String mesFactura) {
 		this.mesFactura = mesFactura;
 	}
 
-	public Long getMesPago() {
+	public String getMesPago() {
 		return mesPago;
 	}
 
-	public void setMesPago(Long mesPago) {
+	public void setMesPago(String mesPago) {
 		this.mesPago = mesPago;
 	}
 
-	public Long getMontoPagado() {
+	public Double getMontoPagado() {
 		return montoPagado;
 	}
 
-	public void setMontoPagado(Long montoPagado) {
+	public void setMontoPagado(Double montoPagado) {
 		this.montoPagado = montoPagado;
 	}
 
-	public Long getImpPagado() {
+	public Double getImpPagado() {
 		return impPagado;
 	}
 
-	public void setImpPagado(Long impPagado) {
+	public void setImpPagado(Double impPagado) {
 		this.impPagado = impPagado;
 	}
 
-	public Long getPagoSinImp() {
+	public Double getPagoSinImp() {
 		return pagoSinImp;
 	}
 
-	public void setPagoSinImp(Long pagoSinImp) {
+	public void setPagoSinImp(Double pagoSinImp) {
 		this.pagoSinImp = pagoSinImp;
 	}
 
-	public Long getTipoPago() {
+	public String getTipoPago() {
 		return tipoPago;
 	}
 
-	public void setTipoPago(Long tipoPago) {
+	public void setTipoPago(String tipoPago) {
 		this.tipoPago = tipoPago;
 	}
 }

@@ -10,11 +10,11 @@ public class Info_660_Mapper {
 	public static PagosFacturados mapearRegioness(ResultSet rs) throws SQLException {
 		PagosFacturados test = new PagosFacturados();
 		test.setRegion(rs.getString("REPORTE660ID"));
-		test.setCiclo(rs.getLong("REGION"));
-		test.setGrupoIng(rs.getLong("CICLO"));
-		test.setMesFactura(rs.getLong("TOTAL"));
-		test.setMesPago(rs.getLong("MES"));
-		test.setMontoPagado(rs.getLong("AÑO"));
+		test.setCiclo(rs.getString("REGION"));
+		test.setGrupoIng(rs.getString("CICLO"));
+		test.setMesFactura(rs.getString("TOTAL"));
+		test.setMesPago(rs.getString("MES"));
+		test.setMontoPagado(rs.getDouble("MONTO_PAGADO"));
 		return test;
 	}
 

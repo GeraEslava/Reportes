@@ -10,12 +10,12 @@ public class Info_1KQ_Mapper {
 	public static PagosFacturados mapearRegioness(ResultSet rs) throws SQLException {
 		PagosFacturados test = new PagosFacturados();
 		test.setRegion(rs.getString("REPORTE1KQID"));
-		test.setCiclo(rs.getLong("CF"));
-		test.setGrupoIng(rs.getLong("GRUPOING"));
-		test.setMesFactura(rs.getLong("AJUSTES"));
-		test.setMesPago(rs.getLong("TOTAL"));
-		test.setMontoPagado(rs.getLong("MES"));
-		test.setImpPagado(rs.getLong("AÑO"));
+		test.setCiclo(rs.getString("CF"));
+		test.setGrupoIng(rs.getString("GRUPOING"));
+		test.setMesFactura(rs.getString("AJUSTES"));
+		test.setMesPago(rs.getString("TOTAL"));
+	//	test.setMontoPagado(rs.getString("MES"));
+	//	test.setImpPagado(rs.getString("AÑO"));
 
 		return test;
 	}

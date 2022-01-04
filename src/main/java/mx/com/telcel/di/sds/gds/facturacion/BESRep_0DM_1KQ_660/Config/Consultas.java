@@ -15,10 +15,10 @@ public interface Consultas {
 	
 	public static final String SQL_OBTENER_TIPO_PAGO = 
 			new StringBuilder(" select * ") 
-			.append(" FROM PAGOS_FACTURADOS")
+			.append(" FROM PAGOS_FACTURADOS ")
 			.toString();
 	
-	public static final String SQL_OBTENER_informacion = 
+	public static final String SQL_OBTENER_MESFACTURA = 
 			new StringBuilder(" select * ") 
 			.append(" FROM PAGOS_FACTURADOS")
 			.toString();

@@ -1,21 +1,23 @@
 package mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model;
 
+import java.util.Date;
+
 public class Reporte0DM {
 
-	private Double ciclo;
+	private String ciclo;
 	private String grupoIng;
-	private String total;
-	private String pagosAdelantados;
-	private String sinPagosAdelantados;
-	private String mes;
-	private String año;
+	private Double total;
+	private Double pagosAdelantados;
+	private Double sinPagosAdelantados;
+	private Date mes;
+	private Date año;
 
 
-	public Double getCiclo() {
+	public String getCiclo() {
 		return ciclo;
 	}
 
-	public void setCiclo(Double ciclo) {
+	public void setCiclo(String ciclo) {
 		this.ciclo = ciclo;
 	}
 
@@ -27,43 +29,43 @@ public class Reporte0DM {
 		this.grupoIng = grupoIng;
 	}
 
-	public String getTotal() {
+	public Double getTotal() {
 		return total;
 	}
 
-	public void setTotal(String total) {
+	public void setTotal(Double total) {
 		this.total = total;
 	}
 
-	public String getPagosAdelantados() {
+	public Double getPagosAdelantados() {
 		return pagosAdelantados;
 	}
 
-	public void setPagosAdelantados(String pagosAdelantados) {
+	public void setPagosAdelantados(Double pagosAdelantados) {
 		this.pagosAdelantados = pagosAdelantados;
 	}
 
-	public String getSinPagosAdelantados() {
+	public Double getSinPagosAdelantados() {
 		return sinPagosAdelantados;
 	}
 
-	public void setSinPagosAdelantados(String sinPagosAdelantados) {
+	public void setSinPagosAdelantados(Double sinPagosAdelantados) {
 		this.sinPagosAdelantados = sinPagosAdelantados;
 	}
 
-	public String getMes() {
+	public Date getMes() {
 		return mes;
 	}
 
-	public void setMes(String mes) {
+	public void setMes(Date mes) {
 		this.mes = mes;
 	}
 
-	public String getAño() {
+	public Date getAño() {
 		return año;
 	}
 
-	public void setAño(String año) {
+	public void setAño(Date año) {
 		this.año = año;
 	}
 

@@ -2,6 +2,7 @@ package mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,8 @@ import org.slf4j.LoggerFactory;
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Config.Constantes;
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Config.Consultas;
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.PagosFacturados;
+import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.Rep0DM;
+import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.RepCiclos0DM;
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.BaseDatos.OperacionesDB;
 
 
@@ -23,10 +26,10 @@ import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.BaseDatos.Operaci
 public class ExtractorInfoReps_0DM_1KQ_660_Dao implements Consultas, Constantes {
 
 	private static final Logger LOG = LoggerFactory.getLogger("funcionalLogger");
-	private Connection conBibes;
+	private static Connection conBibes;
 
 	public ExtractorInfoReps_0DM_1KQ_660_Dao(Connection conBibes) {
-		this.conBibes = conBibes;
+		ExtractorInfoReps_0DM_1KQ_660_Dao.conBibes = conBibes;
 		LOG.info("CONSULTA PAGOS FACTURADOS");
 //		consultaPagosFacturados = SQL_OBTENER_PAGOSFACTURADOS;
 //		return OperacionesDB.getInstance().queryForList(conBibes, consultaPagosFacturados, null);
@@ -45,10 +48,22 @@ public class ExtractorInfoReps_0DM_1KQ_660_Dao implements Consultas, Constantes 
 		return OperacionesDB.getInstance().queryForRegiones(conBibes, consulta, pago);
 	}
 	
+	public ArrayList<Map<String, String>> extraerDatos() throws SQLException {
+		String consulta = SQL_OBTENER_TIPO_PAGO;
+		LOG.info("Tenemnos la consulta : " + consulta );
+		return OperacionesDB.getInstance().queryForDatos(conBibes, consulta, null);
+	}
+	
 	public List<Map<String,String>> extraerTipoPagosXProcesar() throws SQLException {
 		String consulta = SQL_OBTENER_TIPO_PAGO;
 		LOG.info("Tenemnos la consulta : " + consulta );
 		return OperacionesDB.getInstance().queryForList(conBibes, consulta, null);
+	}
+	
+	public List<PagosFacturados> obtenerDatos() throws SQLException {
+		String consulta = SQL_OBTENER_MESFACTURA;
+		LOG.info("Tenemnos la consulta : " + consulta);
+		return OperacionesDB.getInstance().queryForMesFactura(conBibes, consulta);
 	}
 
 }
