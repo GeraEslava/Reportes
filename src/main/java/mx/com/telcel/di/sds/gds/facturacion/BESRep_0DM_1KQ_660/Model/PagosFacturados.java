@@ -1,17 +1,7 @@
 package mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model;
 
 public class PagosFacturados {
-//	private String pagosFacturadosId;
-//	private String region;
-//	private Double ciclo;
-//	private String grupoIng;
-//	private String mesFactura;
-//	private String mesPago;
-//	private Double montoPagado;
-//	private Double impPagado;
-//	private Double pagoSinImp;
-//	private String tipoPago;
-	
+
 	private String region;
 	private String ciclo;
 	private String grupoIng;

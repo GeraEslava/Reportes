@@ -9,7 +9,7 @@ public class Rep0DM {
 	private List<String> etiquetaFechaPago;
 	private Cifras0DM total;
 	private List<GrupoIngreso0DM> resumenGrupoIngreso;
-	
+		
 	public String getMesFactura() {
 		return mesFactura;
 	}

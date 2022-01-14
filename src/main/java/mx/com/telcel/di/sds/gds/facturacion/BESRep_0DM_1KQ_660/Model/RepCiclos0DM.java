@@ -7,6 +7,7 @@ public class RepCiclos0DM {
 	private String ciclo;
 	private Cifras0DM montos;
 	private List<GrupoIngreso0DM> conjuntoIngresos;
+	
 	public String getCiclo() {
 		return ciclo;
 	}

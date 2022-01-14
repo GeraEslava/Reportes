@@ -4,6 +4,7 @@ public class GrupoIngreso0DM {
 	
 	private String grupoIngreso;
 	private Cifras0DM datosCifras;
+	
 	public String getGrupoIngreso() {
 		return grupoIngreso;
 	}

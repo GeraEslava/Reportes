@@ -1,4 +1,4 @@
 $mesGeneracion DE $anioGeneracion
 CICLO GPO. ING.         TOTAL           PAGOS ADELANTADOS    TOT. SIN PAGOS ADEL.       $MES_FACTURA           $MES_FACTURA              $MES_FACTURA             $MES_FACTURA             $MES_FACTURA              $MES_FACTURA           $MES_FACTURA              $MES_FACTURA             $MES_FACTURA              $MES_FACTURA              $MES_FACTURA              $MES_FACTURA  +
 ----- --------- --------------------- --------------------- --------------------- --------------------- --------------------- --------------------- --------------------- --------------------- --------------------- --------------------- --------------------- --------------------- --------------------- --------------------- ---------------------
-$CICLO     $GRUPO_ING       $MONTO_PAGADO
+$CICLO     $grupo_Ing       $MONTO_PAGADO
