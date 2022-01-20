@@ -1,5 +1,7 @@
 package mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model;
 
+import java.util.List;
+
 public class PagosFacturados {
 
 	private String region;
@@ -11,7 +13,17 @@ public class PagosFacturados {
 	private Double impPagado;
 	private Double pagoSinImp;
 	private String tipoPago;
+	private PagosFacturados pagos;
 	
+
+	public PagosFacturados getPagos() {
+		return pagos;
+	}
+
+	public void setPagos(PagosFacturados rep) {
+		this.pagos = rep;
+	}
+
 	public String getRegion() {
 		return region;
 	}

@@ -35,7 +35,7 @@ public class VelocityDesignerService implements Constantes{
 	private static VelocityContext vc = null;
 	private static Template plantillaReporte = null;
 	
-	public static void generarReporte(Reporte0DM ciclos, String pathArchSal) throws IOException {
+	public static void generarReporte(List<Reporte0DM> reporte, String pathArchSal) throws IOException {
 		if(vc == null) {
 			VelocityEngine ve = new VelocityEngine();
 			ve.setProperty(RuntimeConstants.FILE_RESOURCE_LOADER_PATH, App.PATH_TEMPLATE);
@@ -45,51 +45,33 @@ public class VelocityDesignerService implements Constantes{
 			vc = new VelocityContext();
 			vc.put("String", String.class);
 			vc.put("StrUtl", StringUtils.class);
-			llenar0Dm(ciclos, pathArchSal);
+			llenar0Dm(reporte, pathArchSal);
 		}
 		
 	}
 	
-	public static void llenar0Dm(Reporte0DM rep, String pathArchSal) throws IOException {
+	public static void llenar0Dm(List<Reporte0DM> reporte, String pathArchSal) throws IOException {
 		
 		//vc.put("f_a_fin",reporte.getPenalizaciones().getfAmtFineqAmigoFacil());
 		Date fechaGen = new Date();
 		String anioGeneracion = StringUtils.generarFechaEnFormato(fechaGen,"yyyy");
 		String mesGeneracion = StringUtils.generarFechaEnFormato(fechaGen,"MMMM");
-		vc.put("anioGeneracion", anioGeneracion);
+		vc.put("ani", anioGeneracion);
 		vc.put("mesGeneracion", mesGeneracion.toUpperCase());
 		vc.put("mesesReporte", mesesReporte);
-		vc.put("region", rep.getRegion());
-		vc.put("ciclo", rep.getCiclo());
-		vc.put("grupo_Ing", rep.getGrupoIng());
-		vc.put("total", rep.getTotal());
-		vc.put("pagosAdelantados", rep.getPagosAdelantados());
-		vc.put("sinPagosAdelantados", rep.getSinPagosAdelantados());
-		vc.put("mes", rep.getMes());
-		vc.put("año", rep.getAño());
-		vc.put("mes1", rep.getMes1());
-		vc.put("mes2", rep.getMes2());
-		vc.put("mes3", rep.getMes3());
-		vc.put("mes4", rep.getMes4());
-		vc.put("mes5", rep.getMes5());
-		vc.put("mes6", rep.getMes6());
-		vc.put("mes7", rep.getMes7());
-		vc.put("mes8", rep.getMes8());
-		vc.put("mes9", rep.getMes9());
-		vc.put("mes10", rep.getMes10());
-		vc.put("mes11", rep.getMes11());
-		vc.put("mes12", rep.getMes12());
-		
+		vc.put("pagosFacturados", reporte);
 		StringWriter sw = new StringWriter();
 		plantillaReporte.merge(vc, sw);
         Files.write(Paths.get(pathArchSal), sw.toString().getBytes(), StandardOpenOption.APPEND );
 	}
 	
-    public static void datos0Dm(Rep0DM reporte, String pathArchSal) throws IOException {
-		vc.put("mesFactura", reporte.getMesFactura());
+    public static void datos0Dm(Reporte0DM reporte, String pathArchSal) throws IOException {
+		vc.put("ciclo", reporte.getCiclo());
+		vc.put("region", reporte.getRegion());
 		//vc.put("ciclos", reporte.getCiclos());
 		StringWriter sw = new StringWriter();
 		plantillaReporte.merge(vc, sw);
+		
         Files.write(Paths.get(pathArchSal), sw.toString().getBytes(), StandardOpenOption.APPEND );
 	}
 	

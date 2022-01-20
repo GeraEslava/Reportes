@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.GrupoIngreso0DM;
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.PagosFacturados;
+import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.Region0DM;
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.RepCiclos0DM;
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.Reporte0DM;
 
@@ -12,14 +13,9 @@ public class Info_0DM_1KQ_660_Mapper {
 	
 	public static PagosFacturados mapearRegioness(ResultSet rs) throws SQLException {
 		PagosFacturados test = new PagosFacturados();
-		test.setRegion(rs.getString("REGION"));
-		test.setCiclo(rs.getString("CICLO"));
 		test.setGrupoIng(rs.getString("GRUPO_ING"));
 		test.setMesFactura(rs.getString("MES_FACTURA"));
-		test.setMesPago(rs.getString("MES_PAGO"));
-		test.setMontoPagado(rs.getDouble("MONTO_PAGADO"));
-		test.setImpPagado(rs.getDouble("IMP_PAGADO"));
-		test.setPagoSinImp(rs.getDouble("PAGO_SIN_IMP"));
+		test.setRegion(rs.getString("REGION"));
 		test.setTipoPago(rs.getString("TIPO_PAGO"));
 		return test;
 	}
@@ -30,9 +26,12 @@ public class Info_0DM_1KQ_660_Mapper {
 		return test;
 	} 
 		
-	public static RepCiclos0DM mapearCiclos(ResultSet rs) throws SQLException{
-		RepCiclos0DM test = new RepCiclos0DM();
-		test.setCiclo(rs.getString("CICLO"));
+	public static Region0DM mapearRegiones(ResultSet rs) throws SQLException{
+		Region0DM test = new Region0DM();
+		test.setGrupoIng(rs.getString("GRUPO_ING"));
+		test.setMesFactura(rs.getString("MES_FACTURA"));
+		test.setRegion(rs.getString("REGION"));
+		test.setTipoPago(rs.getString("TIPO_PAGO"));
 		return test;
 		
 	}
@@ -42,6 +41,8 @@ public class Info_0DM_1KQ_660_Mapper {
 		test.setRegion(rs.getString("REGION"));
 		test.setCiclo(rs.getString("CICLO"));
 		test.setGrupoIng(rs.getString("GRUPO_ING"));
+		test.setPagosAdelantados(rs.getString("PAGOS_ADELANTADOS"));
+		test.setSinPagosAdelantados(rs.getString("SIN_PAGOS_ADELANTADOS"));
 		test.setMes(rs.getString("MES"));
 		test.setMes0(rs.getString("MES0"));
 		test.setMes1(rs.getString("MES1"));

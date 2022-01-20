@@ -140,8 +140,6 @@ public class GeneradorReporte implements Constantes {
 	
 	//Para generar archivos 
 	
-	
-	
 	private Map<TipoArchivo, Map<Byte, List<Reporte0DM>>> obtenerRegionReportar() throws IOException, SQLException{
 		
 		Map<TipoArchivo, List<String>> archivosXProcesar = obtenerArchivosProcesar();
@@ -211,8 +209,9 @@ public class GeneradorReporte implements Constantes {
 				for(Reporte0DM ciclos : listaCiclosRegion) {
 						ciclos.setCiclo(String.valueOf(region1));
 						System.out.print("for mapear Reporte: " +ciclos);
-						Reporte0DM reporte = mapearInfoReporte(ciclos);
-			            //PagosFacturados rep = mapearInfoReporte(pahtArchivoCtl);
+						//Rep0DM reporte = mapearInfoReporte(ciclos);
+						//PagosFacturados reporte = mapearInfoReporte(ciclos);
+						List<Reporte0DM> reporte = mapearInfoReporte(ciclos);
 						VelocityDesignerService.generarReporte(reporte, pathArchivoReporte);						
 						//pagina++;
 					}
@@ -238,36 +237,38 @@ public class GeneradorReporte implements Constantes {
 		return archivosGenerados;
 	}
 	
-	private Reporte0DM mapearInfoReporte(Reporte0DM ciclos) throws SQLException  {
+//	private PagosFacturados mapearInfoReporte(PagosFacturados ciclos) throws SQLException  {
+//		PagosFacturados reporte = new PagosFacturados();
+//		
+//		List<PagosFacturados> rep = extractorDao.extraerPagosFacturados(ciclos.getRegion());
+//		System.out.println("rep :  --- "+ rep);
+//		PagosFacturados pago = (!rep.isEmpty())? rep.get(0) : new PagosFacturados();
+//		
+//		for(PagosFacturados ciclo : rep) {
+//			reporte.setCiclo(ciclo.getCiclo());
+//			reporte.setGrupoIng(ciclo.getGrupoIng());
+//			reporte.setImpPagado(ciclo.getImpPagado());
+//			reporte.setMesFactura(ciclo.getMesFactura());
+//			reporte.setMesPago(ciclo.getMesPago());
+//			reporte.setMontoPagado(ciclo.getMontoPagado());
+//			reporte.setPagoSinImp(ciclo.getPagoSinImp());
+//			reporte.setRegion(ciclo.getRegion());
+//			reporte.setTipoPago(ciclo.getTipoPago());
+//		}
+//		
+//		System.out.println("reporte llenado: " +reporte);
+//		
+//		return  reporte;
+//}	
+	
+	
+	private List<Reporte0DM> mapearInfoReporte(Reporte0DM ciclos) throws SQLException  {
 		Reporte0DM reporte = new Reporte0DM();
 		
-		List<Reporte0DM> listaCiclosRegion = extractorDao.extraerRegionesXProcesarRep(ciclos.getCiclo());
-		
-		for(Reporte0DM ciclos1 : listaCiclosRegion) {
-			
-			System.out.print("for mapear Reporte: " +ciclos1);
-			reporte.setPagos(ciclos1);
-		}
-		
-		
-		//reporte.setCiclos(ciclos);
-		
-		//List<PagosFacturados> datos = extractorDao.obtenerCiclos(ciclos.getCiclo());
-//		int dato = datos.size();
-//		System.out.println(dato);
-		//PagosFacturados cic = (datos.size());
-		
-		//reporte.setPagos(cic);
-		
-		//System.out.println("Datos: "+ datos);		
-		
-//		List<Reporte0DM> datos1 = extractorDao.obtenerCiclos(reporte.setCiclos(ciclos));
-//		System.out.println("Datos1: "+datos1);
-//		Rep0DM pag = (datos.addAll(reporte));
-//		
-//		System.out.println("Ejemplo: "+pag);
-//		
-		return reporte;
+		List<Reporte0DM> rep = extractorDao.extraerPagosFacturados(ciclos.getRegion());
+		System.out.println("rep :  --- "+ rep);
+
+		return rep;
 }	
 //	private List<PagosFacturados> obtenerMeses(Map<TipoArchivo, Map<Byte, List<PagosFacturados>>> region) throws IOException, SQLException{
 //		List<PagosFacturados> meses = ArrayList();
@@ -286,6 +287,7 @@ public class GeneradorReporte implements Constantes {
 		//System.out.println(datos);
 		System.out.println("1: " +datos1);
 		return meses;
+
 	}
 
 

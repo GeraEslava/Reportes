@@ -5,14 +5,15 @@ import java.util.List;
 public class Cifras0DM {
 	
 	private Double Total;
-	private Double totalPagaAdelantado;
+	private Double totalPagoAdelantado;
 	private Double totalSinImpuestos;
 	private List<Double> fechaPago;
+	
 	public Double getTotal() {
 		return Total;
 	}
-	public Double getTotalPagaAdelantado() {
-		return totalPagaAdelantado;
+	public Double getTotalPagoAdelantado() {
+		return totalPagoAdelantado;
 	}
 	public Double getTotalSinImpuestos() {
 		return totalSinImpuestos;
@@ -23,8 +24,8 @@ public class Cifras0DM {
 	public void setTotal(Double total) {
 		Total = total;
 	}
-	public void setTotalPagaAdelantado(Double totalPagaAdelantado) {
-		this.totalPagaAdelantado = totalPagaAdelantado;
+	public void setTotalPagoAdelantado(Double totalPagaAdelantado) {
+		this.totalPagoAdelantado = totalPagaAdelantado;
 	}
 	public void setTotalSinImpuestos(Double totalSinImpuestos) {
 		this.totalSinImpuestos = totalSinImpuestos;
@@ -34,9 +35,9 @@ public class Cifras0DM {
 	}
 	@Override
 	public String toString() {
-		return "Cifras0DM [Total=" + Total + ", totalPagaAdelantado=" + totalPagaAdelantado + ", totalSinImpuestos="
+		return "Cifras0DM [Total=" + Total + ", totalPagaAdelantado=" + totalPagoAdelantado + ", totalSinImpuestos="
 				+ totalSinImpuestos + ", fechaPago=" + fechaPago + ", getTotal()=" + getTotal()
-				+ ", getTotalPagaAdelantado()=" + getTotalPagaAdelantado() + ", getTotalSinImpuestos()="
+				+ ", getTotalPagaAdelantado()=" + getTotalPagoAdelantado() + ", getTotalSinImpuestos()="
 				+ getTotalSinImpuestos() + ", getFechaPago()=" + getFechaPago() + "]";
 	}
 	

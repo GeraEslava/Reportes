@@ -2,7 +2,6 @@ package mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model;
 
 public class Reporte0DM {
 
-	public  RepCiclos0DM ciclos;
 	private String ciclo;
 	private String region;
 	private String grupoIng;
@@ -10,7 +9,6 @@ public class Reporte0DM {
 	private String pagosAdelantados;
 	private String sinPagosAdelantados;
 	private String mes;
-	private String año;
 	private String mes0;
 	private String mes1;
 	private String mes2;
@@ -24,24 +22,6 @@ public class Reporte0DM {
 	private String mes10;
 	private String mes11;
 	private String mes12;
-	public Reporte0DM pagos;
-
-	
-	public Reporte0DM getPagos() {
-		return pagos;
-	}
-
-	public void setPagos(Reporte0DM ciclos1) {
-		this.pagos = ciclos1;
-	}
-
-	public RepCiclos0DM getCiclos() {
-		return ciclos;
-	}
-
-	public void setCiclos(RepCiclos0DM ciclos) {
-		this.ciclos = ciclos;
-	}
 
 	public String getCiclo() {
 		return ciclo;
@@ -97,14 +77,6 @@ public class Reporte0DM {
 
 	public void setMes(String mes) {
 		this.mes = mes;
-	}
-
-	public String getAño() {
-		return año;
-	}
-
-	public void setAño(String año) {
-		this.año = año;
 	}
 
 	public String getMes0() {
@@ -215,7 +187,7 @@ public class Reporte0DM {
 	public String toString() {
 		return "Reporte0DM [ciclo=" + ciclo + ", region=" + region + ", grupoIng=" + grupoIng + ", total=" + total
 				+ ", pagosAdelantados=" + pagosAdelantados + ", sinPagosAdelantados=" + sinPagosAdelantados + ", mes="
-				+ mes + ", año=" + año + ", mes0=" + mes0 + ", mes1=" + mes1 + ", mes2=" + mes2 + ", mes3=" + mes3
+				+ mes  + ", mes0=" + mes0 + ", mes1=" + mes1 + ", mes2=" + mes2 + ", mes3=" + mes3
 				+ ", mes4=" + mes4 + ", mes5=" + mes5 + ", mes6=" + mes6 + ", mes7=" + mes7 + ", mes8=" + mes8
 				+ ", mes9=" + mes9 + ", mes10=" + mes10 + ", mes11=" + mes11 + ", mes12=" + mes12 + "]";
 	}

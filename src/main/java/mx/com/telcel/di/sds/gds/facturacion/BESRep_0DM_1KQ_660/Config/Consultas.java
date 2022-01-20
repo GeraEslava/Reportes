@@ -14,13 +14,13 @@ public interface Consultas {
 			.toString();
 	
 	public static final String SQL_OBTENER_TIPO_PAGO = 
-			new StringBuilder(" select * ") 
-			.append(" FROM PAGOS_FACTURADOS ")
+			new StringBuilder(" select CICLO, REGION, GRUPO_ING, MES_FACTURA, TIPO_PAGO ") 
+			.append(" FROM PAGOS_FACTURADOS WHERE MES_FACTURA = '202009' ORDER BY REGION ASC ")
 			.toString();
 	
 	public static final String SQL_OBTENER_MESFACTURA = 
 			new StringBuilder(" select * ") 
-			.append(" FROM PAGOS_FACTURADOS")
+			.append(" FROM PAGOS_FACTURADOS ")
 			.toString();
 	
 	public static final String SQL_OBTENER_DATOSREP = 
@@ -30,11 +30,12 @@ public interface Consultas {
 	
 	public static final String SQL_OBTENER_INGRESOS = 
 			new StringBuilder(" select * ") 
-			.append(" FROM PAGOS_FACTURADOS where REGION = ? ")
+			.append(" FROM PAGOS_FACTURADOS where REGION = 'R02' AND GRUPO_ING = 'OTROS' AND TIPO_PAGO = 'NORMAL'")
+			.append(" AND substr(MES_FACTURA, 5, 6) = '09' AND substr(MES_FACTURA, 1, 4) = '2020' GROUP BY REGION, CICLO, GRUPO_ING, substr(MES_FACTURA, 5, 6), MES_FACTURA ")
 			.toString();
 
 	public static final String SQL_OBTENER_CICLOS = 
-			new StringBuilder(" SELECT REGION, CICLO, GRUPO_ING, SUM(MONTO_PAGADO) TOTAL, substr(MES_FACTURA, 5, 6)MES, MES_FACTURA, SUM(IMP_PAGADO), SUM (PAGO_SIN_IMP), ")
+			new StringBuilder(" SELECT REGION, CICLO, GRUPO_ING, SUM(MONTO_PAGADO) TOTAL, substr(MES_FACTURA, 5, 6)MES, MES_FACTURA, SUM(IMP_PAGADO) PAGOS_ADELANTADOS, SUM (PAGO_SIN_IMP) SIN_PAGOS_ADELANTADOS, ")
 			.append(" (SELECT (IMP_PAGADO) FROM PAGOS_FACTURADOS WHERE CICLO = 14 AND GRUPO_ING = 'OTROS' AND TIPO_PAGO = 'NORMAL' AND CAST(substr(MES_FACTURA, 5, 6) AS INTEGER) = 9 + 1 AND substr(MES_FACTURA, 1, 4) = '2020')MES1, ")
 			.append(" (SELECT (IMP_PAGADO) FROM PAGOS_FACTURADOS WHERE CICLO = 14 AND GRUPO_ING = 'OTROS' AND TIPO_PAGO = 'NORMAL' AND CAST(substr(MES_FACTURA, 5, 6) AS INTEGER) = 9 + 2 AND substr(MES_FACTURA, 1, 4) = '2020')MES2, ")
 			.append(" (SELECT (IMP_PAGADO) FROM PAGOS_FACTURADOS WHERE CICLO = 14 AND GRUPO_ING = 'OTROS' AND TIPO_PAGO = 'NORMAL' AND CAST(substr(MES_FACTURA, 5, 6) AS INTEGER) = 9 + 3 AND substr(MES_FACTURA, 1, 4) = '2020')MES3, ")
@@ -49,11 +50,11 @@ public interface Consultas {
 			.append(" (SELECT (IMP_PAGADO) FROM PAGOS_FACTURADOS WHERE CICLO = 14 AND GRUPO_ING = 'OTROS' AND TIPO_PAGO = 'NORMAL' AND CAST(substr(MES_FACTURA, 5, 6) AS INTEGER) = 0 + 8 AND substr(MES_FACTURA, 1, 4) = '2021')MES11, ")
 			.append(" (SELECT (IMP_PAGADO) FROM PAGOS_FACTURADOS WHERE CICLO = 14 AND GRUPO_ING = 'OTROS' AND TIPO_PAGO = 'NORMAL' AND CAST(substr(MES_FACTURA, 5, 6) AS INTEGER) = 0 + 9 AND substr(MES_FACTURA, 1, 4) = '2021')MES12 ")
 			.append(" FROM PAGOS_FACTURADOS ")
-			.append(" WHERE REGION = ? ")
-			//.append(" GRUPO_ING = 'OTROS' ")
+			.append(" WHERE REGION = 'R02' ")
+			.append(" AND GRUPO_ING = 'OTROS' ")
 			.append(" AND TIPO_PAGO = 'NORMAL' ")
-			//.append(" AND substr(MES_FACTURA, 5, 6) = '09' ")
-			//.append(" AND substr(MES_FACTURA, 1, 4) = '2020' ")
+			.append(" AND substr(MES_FACTURA, 5, 6) = '09' ")
+			.append(" AND substr(MES_FACTURA, 1, 4) = '2020' ")
 			.append(" GROUP BY REGION, CICLO, GRUPO_ING, substr(MES_FACTURA, 5, 6), MES_FACTURA ")
 			.append(" ORDER BY CICLO ")
 			.toString();

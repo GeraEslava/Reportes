@@ -1,12 +1,13 @@
 package mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RepCiclos0DM {
 	
 	private String ciclo;
 	private Cifras0DM montos;
-	private List<GrupoIngreso0DM> conjuntoIngresos;
+	private List<GrupoIngreso0DM> conjuntoIngresos = new ArrayList<>();
 	
 	public String getCiclo() {
 		return ciclo;
