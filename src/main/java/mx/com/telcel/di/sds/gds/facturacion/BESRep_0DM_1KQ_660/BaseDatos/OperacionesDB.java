@@ -23,6 +23,7 @@ import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.Region0DM;
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.Rep0DM;
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.RepCiclos0DM;
 import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.Reporte0DM;
+import mx.com.telcel.di.sds.gds.facturacion.BESRep_0DM_1KQ_660.Model.Reporte0DM2;
 
 
 public class OperacionesDB {
@@ -74,6 +75,7 @@ public class OperacionesDB {
 			}
 
 			ResultSet rs = ps.executeQuery();
+			
 			ResultSetMetaData rsm = rs.getMetaData();
 			int numeroColumnas = rsm.getColumnCount();
 			LOG.debug("Ejecutando query: " + query + " | Usando parametros: " + Arrays.toString(parameters));
@@ -85,6 +87,7 @@ public class OperacionesDB {
 //                if (count%5000==0) LOG.info("- Recuperados " + count + " registros");
 				for (int i = 0; i < numeroColumnas; i++) {
 					mapa.put(rsm.getColumnName(i + 1), rs.getString(rsm.getColumnName(i + 1)));
+					LOG.debug("mapa.put( " + rsm.getColumnName(i + 1) + ", " + rs.getString(rsm.getColumnName(i + 1))); //rs.getString("REPORTE660ID")
 				}
 				lista.add(mapa);
 			}
@@ -132,14 +135,15 @@ public class OperacionesDB {
 		return lista;
 	}
 	
-	public List<Reporte0DM> queryForRegiones(Connection connection, String query, String regiones) throws SQLException {
+	public List<Reporte0DM> queryForRegiones(Connection connection, String query, String region) throws SQLException {
 		List<Reporte0DM> lista = new ArrayList<>();
 		try (PreparedStatement ps = connection.prepareStatement(query)){
-			//ps.setString(1, regiones);
+			ps.setString(1, region);
 			
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
-					lista.add(Info_0DM_1KQ_660_Mapper.mapearDatos(rs));
+					//lista.add(Info_0DM_1KQ_660_Mapper.mapearDatos(rs));
+				    lista.add(Info_0DM_1KQ_660_Mapper.mapearDatosFormat(rs));
 				} 
 			} 
 		} catch (SQLException e) {
@@ -149,8 +153,8 @@ public class OperacionesDB {
 		return lista;
 	}
 	
-	public List<Reporte0DM> queryForRep(Connection connection, String query, String regiones) throws SQLException {
-		List<Reporte0DM> lista = new ArrayList<>();
+	public List<Reporte0DM2> queryForRep(Connection connection, String query, String regiones) throws SQLException {
+		List<Reporte0DM2> lista = new ArrayList<>();
 		try (PreparedStatement ps = connection.prepareStatement(query)){
 			
 
@@ -232,8 +236,8 @@ public class OperacionesDB {
 		return lista;
 	}
 	
-	public List<Reporte0DM> queryCiclos(Connection connection, String query) throws SQLException {
-		List<Reporte0DM> lista = new ArrayList<>();
+	public List<Reporte0DM2> queryCiclos(Connection connection, String query) throws SQLException {
+		List<Reporte0DM2> lista = new ArrayList<>();
 		try (PreparedStatement ps = connection.prepareStatement(query)){	
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
@@ -248,4 +252,60 @@ public class OperacionesDB {
 		return lista;
 	}
 	
+	
+	public List<Region0DM> qRegionTipoArchivo(Connection connection, String query, String regiones) throws SQLException {
+		List<Region0DM> lista = new ArrayList<>();
+		try (PreparedStatement ps = connection.prepareStatement(query)){
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					
+				    lista.add(Info_0DM_1KQ_660_Mapper.mapRegionesTipoArchivo(rs));
+				    //System.out.println("hooooooooooooooooooooooooooooooooola");//g:
+				} 
+			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} 
+		return lista;
+	}
+	
+	public List<Region0DM> ciclosXRegion(Connection connection, String query, String region, String fecha) throws SQLException {
+		List<Region0DM> lista = new ArrayList<>();
+		try (PreparedStatement ps = connection.prepareStatement(query)){
+			ps.setString(1, fecha);
+			ps.setString(2, region);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+				    lista.add(Info_0DM_1KQ_660_Mapper.mapCiclosXRegion(rs));
+				} 
+			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} 
+		return lista;
+	}
+	
+	
+	public List<Reporte0DM> queryForRegiones(Connection connection, String query, String region, String ciclo) throws SQLException {
+		List<Reporte0DM> lista = new ArrayList<>();
+		try (PreparedStatement ps = connection.prepareStatement(query)){
+			ps.setString(1, region);
+			//ps.setString(2, ciclo);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					//lista.add(Info_0DM_1KQ_660_Mapper.mapearDatos(rs));
+				    lista.add(Info_0DM_1KQ_660_Mapper.mapearDatosFormat(rs));
+				} 
+			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} 
+		return lista;
+	}
 }

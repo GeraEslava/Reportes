@@ -19,7 +19,7 @@ public class App {
 	public static final String APP_NAME = "BESRep_0DM_1KQ_660";
 	public static String ID_PROC;
 	public static String FCH_ENTREGA;
-	public static String ARCH_TEMPLATE = null;
+	//public static String ARCH_TEMPLATE = null;
 	public static String PATH_TEMPLATE = null;
 	public static String DIR_CFG = null;
 	public static String DIR_LOG = null;
@@ -54,7 +54,7 @@ public class App {
     	CONFIG = new Properties();	
     	NOM_ARCH_CONFIG = APP_NAME + ".application.properties";
 		loadProperties(CONFIG, DIR_CFG + File.separator + NOM_ARCH_CONFIG);
-		ARCH_TEMPLATE = revisaPropiedad("ARCH_TEMPLATE");
+		//ARCH_TEMPLATE = revisaPropiedad("ARCH_TEMPLATE");
 		FORMATO_CIFRAS = revisaPropiedad("FORMATO_CIFRAS");
 		FORMATO_CIFRAS_SEP_MILES = revisaPropiedad("FORMATO_CIFRAS_SEP_MILES");
 		FORMATO_FECHA_DET = revisaPropiedad("FORMATO_FECHA_DET");

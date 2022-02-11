@@ -6,7 +6,14 @@ public class Region0DM {
 	private String grupoIng;
 	private String mesFactura;
 	private String tipoPago;
+	private String ciclo;
 	
+	public String getCiclo() {
+		return ciclo;
+	}
+	public void setCiclo(String ciclo) {
+		this.ciclo = ciclo;
+	}
 	public String getRegion() {
 		return region;
 	}
@@ -31,10 +38,12 @@ public class Region0DM {
 	public void setTipoPago(String tipoPago) {
 		this.tipoPago = tipoPago;
 	}
+	
 	@Override
 	public String toString() {
 		return "Region0DM [region=" + region + ", grupoIng=" + grupoIng + ", mesFactura=" + mesFactura + ", tipoPago="
-				+ tipoPago + "]";
+				+ tipoPago + ", ciclo=" + ciclo + "]";
 	}
+
 	
 }
